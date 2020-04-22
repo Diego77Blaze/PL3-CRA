@@ -1,0 +1,129 @@
+;NATURALES
+
+(escero trois)
+;#<procedure:false>
+((esmenornat cinq) trois)
+;#<procedure:false>
+((esmenornat cinq) six)
+;#<procedure:true>
+
+
+(comprobar((sumnat trois) quatre))
+;7
+(comprobar((restonat sept) cinq))
+;2
+(comprobar(primero ((par trois) deux)))
+;3
+(comprobar(sucesor trois))
+;4
+(comprobar((prodnat sept) cinq))
+;35
+(comprobar((restonat sept) cinq))
+;2
+
+;ENTEROS
+
+((esmenorent cinco) tres)
+;#<procedure:false>
+((esmayorent cinco) tres)
+;#<procedure:true>
+
+(testenteros(segundo ((par cinco) siete)))
+;7
+(testenteros(absoluto siete))
+;7
+(testenteros(absoluto -once))
+;11
+(testenteros((sument -once) quince))
+;4
+(testenteros((mcdent dieciseis) cuatro))
+;4
+
+;RACIONALES
+
+(escero_racional ((par cero) uno))
+;#<procedure:true>
+(escero_racional ((par uno) uno))
+;#<procedure:false>
+((esigual_racional ((par uno) dos)) ((par dos) cuatro))
+;#<procedure:true>
+((mayor_racional ((par tres) cuatro)) ((par tres) cinco))
+;#<procedure:true>
+
+(test_racionales ((suma_racionales ((par uno) dos)) ((par uno) dos)))
+;(1 1)
+(test_racionales ((suma_racionales ((par tres) cuatro)) ((par cuatro) tres)))
+;(25 12)
+(test_racionales ((resta_racionales ((par siete) cinco)) ((par cuatro) cinco)))
+;(3 5)
+(test_racionales ((prod_racionales ((par uno) dos)) ((par cuatro) uno)))
+;(2 1)
+(test_racionales ((prod_racionales ((par uno) cinco)) ((par cuatro) dos)))
+;(2 5)
+(test_racionales (inverso_racionales ((par tres) siete)))
+;(7 3)
+
+;MATRICES RACIONALES
+
+; ---- COPIAR EN FICHERO DE CÓDIGO ----
+(define definir_matriz (lambda (a)
+                         (lambda (b)
+                           (lambda (c)
+                             (lambda (d)
+                               ((par ((par a) b)) ((par c) d)))))))
+
+
+(define test_matriz (lambda (m)
+                        (list (list (test_racionales (primero (primero m))) (test_racionales (segundo (primero m))))
+                              (list (test_racionales (primero (segundo m))) (test_racionales (segundo (segundo m))))
+                        )
+                      )
+)
+
+(define identidad ((((definir_matriz ((par uno) uno)) ((par cero) uno)) ((par cero) uno)) ((par uno) uno)))
+(define matriz_nula ((((definir_matriz ((par cero) uno)) ((par cero) uno)) ((par cero) uno)) ((par cero) uno)))
+(define matriz_prueba1 ((((definir_matriz ((par dos) cuatro)) ((par cuatro) cuatro)) ((par -uno) cuatro)) ((par cinco) cuatro)))
+(define matriz_prueba2 ((((definir_matriz ((par uno) cuatro))   ((par -cuatro) seis))     ((par dos) ocho)) ((par -dos) tres)))
+(define matriz_prueba3 ((((definir_matriz ((par uno) dos))   ((par -cuatro) dos))     ((par dos) dos)) ((par -tres) dos)))
+; --------------------------------------
+
+(test_matriz identidad)
+;(((1 1) (0 1)) ((0 1) (1 1)))
+(test_matriz matriz_prueba1)
+;(((2 4) (4 4)) ((-1 4) (5 4)))
+(test_matriz matriz_prueba2)
+;(((1 8) (3 6)) ((-2 4) (-2 3)))
+
+(inversa? matriz_prueba1)
+;#<procedure:true>
+(inversa? matriz_prueba2)
+;#<procedure:false>
+
+(test_racionales (determinante matriz_prueba1))
+;(7 8)
+(test_racionales (determinante matriz_prueba2))
+;(0 1)
+
+(test_matriz ((suma_matrices matriz_prueba1) matriz_prueba2))
+;(((3 4) (1 3)) ((0 1) (7 12)))
+(test_matriz ((prod_matrices matriz_prueba1) matriz_prueba2))
+;(((7 24) (-7 12)) ((7 24) (-7 12)))
+(test_matriz (cuadrado_matrices matriz_prueba1))
+;(((0 1) (7 4)) ((-7 16) (21 16)))
+(test_matriz ((potencia_matrices identidad) cinq))
+;(((1 1) (0 1)) ((0 1) (1 1)))
+(test_matriz ((potencia_matrices matriz_prueba3) trois))
+;(((9 8) (1 2)) ((-1 4) (13 8)))
+(test_matriz (inversa matriz_prueba1))
+;(((10 7) (-8 7)) ((2 7) (4 7)))
+(test_matriz ((prod_matrices matriz_prueba1) (inversa matriz_prueba1)))
+;(((1 1) (0 1)) ((0 1) (1 1)))
+
+
+
+
+
+
+
+
+
