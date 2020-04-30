@@ -260,11 +260,7 @@
 ;;;;;;
 ;;;;;;                     (m,n) R (m',n') si y solo si m-n=m'-n'
 
-<<<<<<< HEAD
-(define zero ((par cero) cero))
-=======
 (define cero ((par zero) zero))
->>>>>>> b14c763e66b668e4eb5c84d0599786dcaac597a1
 
 (define -uno ((par zero) un))
 
