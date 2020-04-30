@@ -45,9 +45,44 @@
 (define resta_racional
   (lambda (num1)
     (lambda (num2)
-      (lambda (y)
-        ((reduc_canonica ((resta_racional num1) num2)) y)
-       )
+      (reduc_canonica
+         ((restaent
+           (prodent(primero num1)(mcment(segundo num1)(segundo num2)))
+           (prodent(primero num2)(mcment(segundo num1)(segundo num2))))
+          )
+         (mcment(segundo num1)(segundo num2))
+         )
      )
    )
 )
+
+(define prod_racionales
+  (lambda (num1)
+    (lambda (num2)
+      (reduc_canonica
+       ((prodent (primero num1) (primero num2)))
+       ((prodent (segundo num1) (segundo num2)))
+       )
+      )
+    )
+  )
+
+(define div_racionales
+  (lambda (num1)
+    (lambda (num2)
+      (reduc_canonica
+       ((prodent (primero num1) (primero (inverso_racionales num2))))
+       ((prodent (segundo num1) (segundo (inverso_racionales num2))))
+       )
+      )
+    )
+  )
+
+(define inverso_racionales
+  (lambda (num)
+    (reduc_canonica
+     (segundo num)
+     (primero num)
+     )
+    )
+  )
