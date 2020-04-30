@@ -35,17 +35,17 @@
   (lambda (num1)
     (lambda (num2)
       (lambda (y)
-        ((reduccanonica ((sument num1) num2)) y)
+        ((reduccanonica ((sumarac num1) num2)) y)
        )
      )
    )
 )
 
-(define restorac
+(define restarac
   (lambda (num1)
     (lambda (num2)
       (lambda (y)
-        ((reduccanonica ((restaent num1) num2)) y)
+        ((reduccanonica ((restarac num1) num2)) y)
        )
      )
    )
