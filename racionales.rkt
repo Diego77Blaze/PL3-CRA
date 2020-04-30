@@ -27,12 +27,10 @@
   )
 )
 
-(define sumarac
+(define suma_racional
   (lambda (num1)
     (lambda (num2)
-      (lambda (y)
-        ((reduccanonica ((sumarac num1) num2)) y)
-       )
+        (reduccanonica ((sument (prodent(primero num1)(mcment(segundo num1)(segundo num2)))(prodent(primero num2)(mcment(segundo num1)(segundo num2))))) (mcment(segundo num1)(segundo num2)))
      )
    )
 )
