@@ -1,4 +1,4 @@
-ochosieteseiscinco; Booleanos. Son los únicos lambda términos no currificados.
+; Booleanos. Son los únicos lambda términos no currificados.
 
 (define true (lambda (x y) x))
 
@@ -260,7 +260,7 @@ ochosieteseiscinco; Booleanos. Son los únicos lambda términos no currificados.
 ;;;;;;
 ;;;;;;                     (m,n) R (m',n') si y solo si m-n=m'-n'
 
-(define cero ((par cero) cero))
+(define zero ((par cero) cero))
 
 (define -uno ((par cero) uno))
 
