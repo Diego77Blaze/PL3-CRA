@@ -1,17 +1,17 @@
-ochosieteseiscinco; Booleanos. Son los únicos lambda términos no currificados.
+; Booleanos. Son los únicos lambda términos no currificados.
 
 (define true (lambda (x y) x))
 
 (define false (lambda (x y) y))
 
 (define neg (lambda (x) (x false true)))
-
+                         
 (define and (lambda (x y) (x y false)))
 
 (define or (lambda (x y) (x true y)))
 
 ; Pares ordenados
-
+              
 (define par (lambda (x)
               (lambda (y)
                 (lambda (f) (f x y)))))
@@ -32,11 +32,11 @@ ochosieteseiscinco; Booleanos. Son los únicos lambda términos no currificados.
 (define esmenoroigualnat (lambda (n)
                              (lambda (m)
                                 (escero ((restanat n) m)))))
-
+                         
 (define esmayoroigualnat (lambda (n)
                             (lambda (m)
                                (escero ((restanat m) n)))))
-
+                         
 (define esmenornat (lambda (n)
                      (lambda (m)
                        (and ((esmenoroigualnat n) m) (noescero ((restanat m) n))))))
@@ -55,10 +55,10 @@ ochosieteseiscinco; Booleanos. Son los únicos lambda términos no currificados.
 (define noescero (lambda (n)
                     (neg (escero n))))
 
-; Aritmética natural. Se define también "comprobar" para poder hacer pruebas. Se definen algunos naturales para hacer comprobaciones. Se escriben en francés para distinguirlos de los enteros
+; Aritmética natural. Se define también "comprobar" para poder hacer pruebas. Se definen algunos naturales para hacer comprobaciones. Se escriben en francés para distinguirlos de los enteros 
 ; que se escribirán en español.
 
-(define cero (lambda (f)
+(define zero (lambda (f)
                (lambda (x) x)))
 
 (define sucesor (lambda (n)
@@ -66,45 +66,45 @@ ochosieteseiscinco; Booleanos. Son los únicos lambda términos no currificados.
                     (lambda (x)
                      (f((n f) x))))))
 
-(define uno (sucesor cero))
+(define un (sucesor zero))
 
-(define dos (sucesor uno))
+(define deux (sucesor un))
 
-(define tres (sucesor dos))
+(define trois (sucesor deux))
 
-(define cuatro (sucesor tres))
+(define quatre (sucesor trois))
 
-(define cinco (sucesor cuatro))
+(define cinq (sucesor quatre))
 
-(define seis (sucesor cinco))
+(define six (sucesor cinq))
 
-(define siete (sucesor seis))
+(define sept (sucesor six))
 
-(define ocho (sucesor siete))
+(define huit (sucesor sept))
 
-(define nueve (sucesor ocho))
+(define neuf (sucesor huit))
 
-(define diez (sucesor nueve))
+(define dix (sucesor neuf))
 
-(define once (sucesor diez))
+(define onze (sucesor dix))
 
-(define doce (sucesor once))
+(define douze (sucesor onze))
 
-(define trece (sucesor doce))
+(define treize (sucesor douze))
 
-(define catorce (sucesor trece))
+(define quatorze (sucesor treize))
 
-(define quince (sucesor catorce))
+(define quinze (sucesor quatorze))
 
-(define diez-seis (sucesor quince))
+(define seize (sucesor quinze))
 
-(define diez-siete (sucesor diez-seis))
+(define dix-sept (sucesor seize))
 
-(define diez-ocho (sucesor diez-siete))
+(define dix-huit (sucesor dix-sept))
 
-(define diez-nueve (sucesor diez-ocho))
+(define dix-neuf (sucesor dix-huit))
 
-(define vingt (sucesor diez-nueve))
+(define vingt (sucesor dix-neuf))
 
 ;; Comprobar
 
@@ -123,22 +123,22 @@ ochosieteseiscinco; Booleanos. Son los únicos lambda términos no currificados.
                    (lambda (m)
                      (lambda (f)
                        (lambda (x) ((m (n f)) x))))))
-
+                     
 (define prefn (lambda (f)
                 (lambda (p)
                   ((par (f (primero p))) (primero p)))))
 
-;; Predecesor y resta
+;; Predecesor y resta 
 
 (define predecesor (lambda (n)
                      (lambda (f)
                        (lambda (x)
                             (segundo ((n ((lambda (g)
                                              (lambda (p) ((prefn g) p))) f)) ((par x) x)))))))
-
+                         
 (define restanat (lambda (n)
                      (lambda (m)
-                        ((m (lambda (x) (predecesor x))) n))))
+                        ((m (lambda (x) (predecesor x))) n))))                                                 
 
 ;; Resto de la división euclídea. Si el divisor es cero, devuelve false.
 
@@ -147,7 +147,7 @@ ochosieteseiscinco; Booleanos. Son los únicos lambda términos no currificados.
         (lambda (m)
             ((Y (lambda (f)
                  (lambda (x)
-                    ((((esmayoroigualnat x) m)
+                    ((((esmayoroigualnat x) m)  
                         (lambda (no_use)
                             (f ((restanat x) m))
                         )
@@ -155,7 +155,7 @@ ochosieteseiscinco; Booleanos. Son los únicos lambda términos no currificados.
                             x
                         )
                     )
-                        cero)    ; Pasa cero como argumento de no_use
+                        zero)    ; Pasa zero como argumento de no_use
                 )
             ))
                 n)  ; Pasa n como el valor inicial de x.
@@ -164,7 +164,7 @@ ochosieteseiscinco; Booleanos. Son los únicos lambda términos no currificados.
 
 (define restonat (lambda (n)
                       (lambda (m)
-                        (((escero m) (lambda (no_use) false) (lambda (no_use) ((restonataux n) m))) cero))))
+                        (((escero m) (lambda (no_use) false) (lambda (no_use) ((restonataux n) m))) zero))))
 
 ;; Cociente de la división euclídea. Al igual que el resto, devuelve false si se divide por cero.
 
@@ -173,15 +173,15 @@ ochosieteseiscinco; Booleanos. Son los únicos lambda términos no currificados.
         (lambda (m)
             ((Y (lambda (f)
                 (lambda (x)
-                    ((((esmayoroigualnat x) m)
+                    ((((esmayoroigualnat x) m)  
                         (lambda (no_use)
-                            (sucesor (f ((restanat x) m)))
+                            (sucesor (f ((restanat x) m)))  
                         )
                         (lambda (no_use)
-                            cero
+                            zero
                         )
                     )
-                        cero)    ; Pasa cero como argumento de no_use
+                        zero)    ; Pasa zero como argumento de no_use
                 )
             ))
                 n)  ; Pasa n como el valor inicial de x.
@@ -191,7 +191,7 @@ ochosieteseiscinco; Booleanos. Son los únicos lambda términos no currificados.
 
 (define cocientenat (lambda (n)
                       (lambda (m)
-                        (((escero m) (lambda (no_use) false) (lambda (no_use) ((cocientenataux n) m))) cero))))
+                        (((escero m) (lambda (no_use) false) (lambda (no_use) ((cocientenataux n) m))) zero))))
 
 ;; Máximo común denominador.
 
@@ -201,16 +201,16 @@ ochosieteseiscinco; Booleanos. Son los únicos lambda términos no currificados.
             (((Y (lambda (f)
                    (lambda (x)
                      (lambda(y)
-                      (((escero y)
+                      (((escero y)  
                        (lambda (no_use)
                             x
-                        )
+                        ) 
                        (lambda (no_use)
-                            ((f y)((restonat x) y))
+                            ((f y)((restonat x) y)) 
                         )
-
+                        
                     )
-                        cero)    ; Pasa cero como argumento de no_use
+                        zero)    ; Pasa zero como argumento de no_use
                 ))
             ))
                 n) ; Pasa n como el valor inicial de x.
@@ -221,7 +221,7 @@ ochosieteseiscinco; Booleanos. Son los únicos lambda términos no currificados.
 ;;;; Paridad
 
 (define par? (lambda (n)
-               (escero ((restonat n) dos))))
+               (escero ((restonat n) deux))))
 
 (define cuadrado (lambda (n)
                    ((prodnat n) n)))
@@ -236,17 +236,17 @@ ochosieteseiscinco; Booleanos. Son los únicos lambda términos no currificados.
                 (lambda (y)
                     (((escero y)
                         (lambda (no_use)
-                            uno
+                            un
                         )
                         (lambda (no_use)
                           (((par? y)
                            (lambda (no_use1)
-                             (cuadrado (f ((cocientenat y) dos))))
+                             (cuadrado (f ((cocientenat y) deux))))
                            (lambda (no_use1)
-                             ((prodnat n) (f (predecesor y))))) cero)
+                             ((prodnat n) (f (predecesor y))))) zero)
                         )
                     )
-                        cero)    ; Pasa cero como argumento de no_use
+                        zero)    ; Pasa zero como argumento de no_use
                 )
             ))
                 m)  ; Pasa n como el valor inicial de x.
@@ -255,100 +255,100 @@ ochosieteseiscinco; Booleanos. Son los únicos lambda términos no currificados.
 )
 
 ;;;;;; Definición de algunos enteros. Se codifican los enteros mediante pares de naturales: el par (m,n) es una representación de m-n. Es obvio que varios
-;;;;;; pares codifican el mismo entero. Por ejemplo, (7,5)=(9,7). Por lo tanto, los enteros se definen como el conjunto cociente de NxN mediante la relación
+;;;;;; pares codifican el mismo entero. Por ejemplo, (7,5)=(9,7). Por lo tanto, los enteros se definen como el conjunto cociente de NxN mediante la relación 
 ;;;;;; de equivalencia R dada por
 ;;;;;;
 ;;;;;;                     (m,n) R (m',n') si y solo si m-n=m'-n'
 
-(define cero ((par cero) cero))
+(define cero ((par zero) zero))
 
-(define -uno ((par cero) uno))
+(define -uno ((par zero) un))
 
-(define -dos ((par cero) dos))
+(define -dos ((par zero) deux))
 
-(define -tres ((par cero) tres))
+(define -tres ((par zero) trois))
 
-(define -cuatro ((par cero) cuatro))
+(define -cuatro ((par zero) quatre))
 
-(define -cinco ((par cero) cinco))
+(define -cinco ((par zero) cinq))
 
-(define -seis ((par cero) seis))
+(define -seis ((par zero) six))
 
-(define -siete ((par cero) siete))
+(define -siete ((par zero) sept))
 
-(define -ocho ((par cero) ocho))
+(define -ocho ((par zero) huit))
 
-(define -nueve ((par cero) nueve))
+(define -nueve ((par zero) neuf))
 
-(define -diez ((par cero) diez))
+(define -diez ((par zero) dix))
 
-(define -once ((par cero) once))
+(define -once ((par zero) onze))
 
-(define -doce ((par cero) doce))
+(define -doce ((par zero) douze))
 
-(define -trece ((par cero) trece))
+(define -trece ((par zero) treize))
 
-(define -catorce ((par cero) catorce))
+(define -catorce ((par zero) quatorze))
 
-(define -quince ((par cero) quince))
+(define -quince ((par zero) quinze))
 
-(define -diez-seis ((par cero) diez-seis))
+(define -dieciseis ((par zero) seize))
 
-(define -diecisiete ((par cero) diez-siete))
+(define -diecisiete ((par zero) dix-sept))
 
-(define -dieciocho ((par cero) diez-ocho))
+(define -dieciocho ((par zero) dix-huit))
 
-(define -diecinueve ((par cero) diez-nueve))
+(define -diecinueve ((par zero) dix-neuf))
 
-(define -veinte ((par cero) vingt))
+(define -veinte ((par zero) vingt))
 
-(define uno ((par uno) cero))
+(define uno ((par un) zero))
 
-(define dos ((par dos) cero))
+(define dos ((par deux) zero))
 
-(define tres ((par tres) cero))
+(define tres ((par trois) zero))
 
-(define cuatro ((par cuatro) cero))
+(define cuatro ((par quatre) zero))
 
-(define cinco ((par cinco) cero))
+(define cinco ((par cinq) zero))
 
-(define seis ((par seis) cero))
+(define seis ((par six) zero))
 
-(define siete ((par siete) cero))
+(define siete ((par sept) zero))
 
-(define ocho ((par ocho) cero))
+(define ocho ((par huit) zero))
 
-(define nueve ((par nueve) cero))
+(define nueve ((par neuf) zero))
 
-(define diez ((par diez) cero))
+(define diez ((par dix) zero))
 
-(define once ((par once) cero))
+(define once ((par onze) zero))
 
-(define doce ((par doce) cero))
+(define doce ((par douze) zero))
 
-(define trece ((par trece) cero))
+(define trece ((par treize) zero))
 
-(define catorce ((par catorce) cero))
+(define catorce ((par quatorze) zero))
 
-(define quince ((par quince) cero))
+(define quince ((par quinze) zero))
 
-(define diez-seis ((par diez-seis) cero))
+(define dieciseis ((par seize) zero))
 
-(define diecisiete ((par diez-siete) cero))
+(define diecisiete ((par dix-sept) zero))
 
-(define dieciocho ((par diez-ocho) cero))
+(define dieciocho ((par dix-huit) zero))
 
-(define diecinueve ((par diez-nueve) cero))
+(define diecinueve ((par dix-neuf) zero))
 
-(define veinte ((par vingt) cero))
+(define veinte ((par vingt) zero))
 
-;;;;; Orden, valor absoluto y tests de nulidad, positividad y negatividad.
+;;;;; Orden, valor absoluto y tests de nulidad, positividad y negatividad. 
 ;;;
 ;;; m-n > m'-n' si y solo si m+n' > m'+n e igual con el resto
 
 (define esmayoroigualent (lambda (r)
                            (lambda (s)
-                             ((esmayoroigualnat ((sumnat (primero r)) (segundo s))) ((sumnat (primero s)) (segundo r))))))
+                             ((esmayoroigualnat ((sumnat (primero r)) (segundo s))) ((sumnat (primero s)) (segundo r)))))) 
 
 (define esmenoroigualent (lambda (r)
                            (lambda (s)
@@ -367,7 +367,7 @@ ochosieteseiscinco; Booleanos. Son los únicos lambda términos no currificados.
                              ((esigualnat ((sumnat (primero r)) (segundo s))) ((sumnat (primero s)) (segundo r))))))
 
 (define absoluto (lambda (r)
-                    (((esmayoroigualnat (primero r)) (segundo r)) ((par ((restanat (primero r)) (segundo r))) cero) ((par ((restanat (segundo r)) (primero r))) cero))))
+                    (((esmayoroigualnat (primero r)) (segundo r)) ((par ((restanat (primero r)) (segundo r))) zero) ((par ((restanat (segundo r)) (primero r))) zero))))
 
 (define negativo (lambda (r)
                    ((esmenorent r) cero)))
@@ -377,18 +377,18 @@ ochosieteseiscinco; Booleanos. Son los únicos lambda términos no currificados.
 
 (define esceroent (lambda (r)
                      ((esigualnat (primero r)) (segundo r))))
-
+                      
 (define noesceroent (lambda (r)
                        (neg (esceroent r))))
 
 ;;;;; Reducción a representante canónico de la clase de equivalencia.
 
 (define reducir (lambda (r)
-                  (((esmayoroigualnat (primero r)) (segundo r))
-                        ((par ((restanat (primero r)) (segundo r))) cero)
-                        ((par cero) ((restanat (segundo r)) (primero r))))))
+                  (((esmayoroigualnat (primero r)) (segundo r)) 
+                        ((par ((restanat (primero r)) (segundo r))) zero)
+                        ((par zero) ((restanat (segundo r)) (primero r))))))
 
-;;;;; Aritmética entera. La respuesta está siempre dada por el representante canónico de la clase de equivalencia.
+;;;;; Aritmética entera. La respuesta está siempre dada por el representante canónico de la clase de equivalencia. 
 
 (define testenteros (lambda (r)
                       (- (comprobar (primero r)) (comprobar (segundo r)))))
@@ -400,7 +400,7 @@ ochosieteseiscinco; Booleanos. Son los únicos lambda términos no currificados.
 (define prodent (lambda (r)
                   (lambda (s)
                     (reducir ((par ((sumnat ((prodnat (primero r)) (primero s))) ((prodnat (segundo r)) (segundo s))))
-                          ((sumnat ((prodnat (primero r)) (segundo s))) ((prodnat (segundo r)) (primero s))))))))
+                          ((sumnat ((prodnat (primero r)) (segundo s))) ((prodnat (segundo r)) (primero s))))))))                       
 
 (define restaent (lambda (r)
                    (lambda (s)
@@ -424,15 +424,15 @@ ochosieteseiscinco; Booleanos. Son los únicos lambda términos no currificados.
 
 (define cocienteentaux-caso1 (lambda (r)
                                (lambda (s)
-                                  ((or (and ((esmayoroigualent r) cero) (positivo s)) (and (negativo r) (negativo s))) ((par ((cocientenat (primero (absoluto r))) (primero (absoluto s)))) cero)
-                                                                                                                       ((par cero) ((cocientenat (primero (absoluto r))) (primero (absoluto s))))))))
-
+                                  ((or (and ((esmayoroigualent r) cero) (positivo s)) (and (negativo r) (negativo s))) ((par ((cocientenat (primero (absoluto r))) (primero (absoluto s)))) zero)
+                                                                                                                       ((par zero) ((cocientenat (primero (absoluto r))) (primero (absoluto s))))))))
+                              
 ; Caso 2: resto no nulo
 
 (define cocienteentaux-caso2 (lambda (r)
                                 (lambda (s)
-                                    (((esmayoroigualent r) cero) ((positivo s) ((par ((cocienteent_aux r) s)) cero) ((par cero) ((cocienteent_aux r) s)))
-                                                                 ((positivo s) ((par cero) (sucesor ((cocienteent_aux r) s))) ((par (sucesor ((cocienteent_aux r) s))) cero))))))
+                                    (((esmayoroigualent r) cero) ((positivo s) ((par ((cocienteent_aux r) s)) zero) ((par zero) ((cocienteent_aux r) s)))
+                                                                 ((positivo s) ((par zero) (sucesor ((cocienteent_aux r) s))) ((par (sucesor ((cocienteent_aux r) s))) zero))))))
 ; Cociente cuando no hay división por cero
 
 (define cocienteentaux (lambda (r)
@@ -443,14 +443,14 @@ ochosieteseiscinco; Booleanos. Son los únicos lambda términos no currificados.
 
 (define cocienteent (lambda (r)
                       (lambda (s)
-                        (((esceroent s) (lambda (no_use) false) (lambda (no_use) ((cocienteentaux r) s))) cero))))
+                        (((esceroent s) (lambda (no_use) false) (lambda (no_use) ((cocienteentaux r) s))) zero))))
 
 ; Resto. Si se divide por cero, devuelve false
 
 (define restoentaux1 (lambda (r)
                         (lambda (s)
-                          ((or (and ((esmayoroigualent r) cero) (positivo s)) (and ((esmayoroigualent r) cero) (negativo s))) ((par ((restonat (primero (absoluto r))) (primero (absoluto s)))) cero)
-                                                                                                           ((par ((restanat (primero (absoluto s)))((restonat (primero (absoluto r))) (primero (absoluto s))))) cero)))))
+                          ((or (and ((esmayoroigualent r) cero) (positivo s)) (and ((esmayoroigualent r) cero) (negativo s))) ((par ((restonat (primero (absoluto r))) (primero (absoluto s)))) zero)
+                                                                                                           ((par ((restanat (primero (absoluto s)))((restonat (primero (absoluto r))) (primero (absoluto s))))) zero)))))
 
 (define restoentaux (lambda (r)
                        (lambda (s)
@@ -458,13 +458,13 @@ ochosieteseiscinco; Booleanos. Son los únicos lambda términos no currificados.
 
 (define restoent (lambda (r)
                       (lambda (s)
-                        (((esceroent s) (lambda (no_use) false) (lambda (no_use) ((restoentaux r) s))) cero))))
+                        (((esceroent s) (lambda (no_use) false) (lambda (no_use) ((restoentaux r) s))) zero))))
 
 ;; Como mcd (r,s)=mcd(|r|,|s|), se tiene
 
 (define mcdent (lambda (r)
                  (lambda (s)
-                   ((par ((mcdnat (primero (absoluto r))) (primero (absoluto s)))) cero))))
+                   ((par ((mcdnat (primero (absoluto r))) (primero (absoluto s)))) zero))))
 
 ;; Mínimo común múltiplo
 
