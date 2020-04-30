@@ -14,21 +14,17 @@
 
 
 
-(define escerorac
+(define escero_racional
   (lambda (x)
-    (lambda (y)
-      (escerorac ((reduccanonica x) y))
+      (escero_racional ((reduccanonica (primero x)) (segundo x)))
      )
-   )
 )
 
 
-(define noescerorac
+(define noescero_racional
   (lambda (x)
-    (lambda(y)
-      (neg ((escerorac x) y))
-     )
-   )
+      (neg ((escero_racional (primero x) (segundo x))))
+  )
 )
 
 (define sumarac
