@@ -31,3 +31,22 @@
    )
 )
 
+(define sumarac
+  (lambda (num1)
+    (lambda (num2)
+      (lambda (y)
+        ((reduccanonica ((sument num1) num2)) y)
+       )
+     )
+   )
+)
+
+(define restorac
+  (lambda (num1)
+    (lambda (num2)
+      (lambda (y)
+        ((reduccanonica ((restaent num1) num2)) y)
+       )
+     )
+   )
+)
