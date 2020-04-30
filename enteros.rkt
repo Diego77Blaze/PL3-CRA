@@ -1,17 +1,17 @@
-; Booleanos. Son los únicos lambda términos no currificados.
+ochosieteseiscinco; Booleanos. Son los únicos lambda términos no currificados.
 
 (define true (lambda (x y) x))
 
 (define false (lambda (x y) y))
 
 (define neg (lambda (x) (x false true)))
-                         
+
 (define and (lambda (x y) (x y false)))
 
 (define or (lambda (x y) (x true y)))
 
 ; Pares ordenados
-              
+
 (define par (lambda (x)
               (lambda (y)
                 (lambda (f) (f x y)))))
@@ -32,11 +32,11 @@
 (define esmenoroigualnat (lambda (n)
                              (lambda (m)
                                 (escero ((restanat n) m)))))
-                         
+
 (define esmayoroigualnat (lambda (n)
                             (lambda (m)
                                (escero ((restanat m) n)))))
-                         
+
 (define esmenornat (lambda (n)
                      (lambda (m)
                        (and ((esmenoroigualnat n) m) (noescero ((restanat m) n))))))
@@ -55,10 +55,10 @@
 (define noescero (lambda (n)
                     (neg (escero n))))
 
-; Aritmética natural. Se define también "comprobar" para poder hacer pruebas. Se definen algunos naturales para hacer comprobaciones. Se escriben en francés para distinguirlos de los enteros 
+; Aritmética natural. Se define también "comprobar" para poder hacer pruebas. Se definen algunos naturales para hacer comprobaciones. Se escriben en francés para distinguirlos de los enteros
 ; que se escribirán en español.
 
-(define zero (lambda (f)
+(define cero (lambda (f)
                (lambda (x) x)))
 
 (define sucesor (lambda (n)
@@ -66,45 +66,45 @@
                     (lambda (x)
                      (f((n f) x))))))
 
-(define un (sucesor zero))
+(define uno (sucesor cero))
 
-(define deux (sucesor un))
+(define dos (sucesor uno))
 
-(define trois (sucesor deux))
+(define tres (sucesor dos))
 
-(define quatre (sucesor trois))
+(define cuatro (sucesor tres))
 
-(define cinq (sucesor quatre))
+(define cinco (sucesor cuatro))
 
-(define six (sucesor cinq))
+(define seis (sucesor cinco))
 
-(define sept (sucesor six))
+(define siete (sucesor seis))
 
-(define huit (sucesor sept))
+(define ocho (sucesor siete))
 
-(define neuf (sucesor huit))
+(define nueve (sucesor ocho))
 
-(define dix (sucesor neuf))
+(define diez (sucesor nueve))
 
-(define onze (sucesor dix))
+(define once (sucesor diez))
 
-(define douze (sucesor onze))
+(define doce (sucesor once))
 
-(define treize (sucesor douze))
+(define trece (sucesor doce))
 
-(define quatorze (sucesor treize))
+(define catorce (sucesor trece))
 
-(define quinze (sucesor quatorze))
+(define quince (sucesor catorce))
 
-(define seize (sucesor quinze))
+(define diez-seis (sucesor quince))
 
-(define dix-sept (sucesor seize))
+(define diez-siete (sucesor diez-seis))
 
-(define dix-huit (sucesor dix-sept))
+(define diez-ocho (sucesor diez-siete))
 
-(define dix-neuf (sucesor dix-huit))
+(define diez-nueve (sucesor diez-ocho))
 
-(define vingt (sucesor dix-neuf))
+(define vingt (sucesor diez-nueve))
 
 ;; Comprobar
 
@@ -123,22 +123,22 @@
                    (lambda (m)
                      (lambda (f)
                        (lambda (x) ((m (n f)) x))))))
-                     
+
 (define prefn (lambda (f)
                 (lambda (p)
                   ((par (f (primero p))) (primero p)))))
 
-;; Predecesor y resta 
+;; Predecesor y resta
 
 (define predecesor (lambda (n)
                      (lambda (f)
                        (lambda (x)
                             (segundo ((n ((lambda (g)
                                              (lambda (p) ((prefn g) p))) f)) ((par x) x)))))))
-                         
+
 (define restanat (lambda (n)
                      (lambda (m)
-                        ((m (lambda (x) (predecesor x))) n))))                                                 
+                        ((m (lambda (x) (predecesor x))) n))))
 
 ;; Resto de la división euclídea. Si el divisor es cero, devuelve false.
 
@@ -147,7 +147,7 @@
         (lambda (m)
             ((Y (lambda (f)
                  (lambda (x)
-                    ((((esmayoroigualnat x) m)  
+                    ((((esmayoroigualnat x) m)
                         (lambda (no_use)
                             (f ((restanat x) m))
                         )
@@ -155,7 +155,7 @@
                             x
                         )
                     )
-                        zero)    ; Pasa zero como argumento de no_use
+                        cero)    ; Pasa cero como argumento de no_use
                 )
             ))
                 n)  ; Pasa n como el valor inicial de x.
@@ -164,7 +164,7 @@
 
 (define restonat (lambda (n)
                       (lambda (m)
-                        (((escero m) (lambda (no_use) false) (lambda (no_use) ((restonataux n) m))) zero))))
+                        (((escero m) (lambda (no_use) false) (lambda (no_use) ((restonataux n) m))) cero))))
 
 ;; Cociente de la división euclídea. Al igual que el resto, devuelve false si se divide por cero.
 
@@ -173,15 +173,15 @@
         (lambda (m)
             ((Y (lambda (f)
                 (lambda (x)
-                    ((((esmayoroigualnat x) m)  
+                    ((((esmayoroigualnat x) m)
                         (lambda (no_use)
-                            (sucesor (f ((restanat x) m)))  
+                            (sucesor (f ((restanat x) m)))
                         )
                         (lambda (no_use)
-                            zero
+                            cero
                         )
                     )
-                        zero)    ; Pasa zero como argumento de no_use
+                        cero)    ; Pasa cero como argumento de no_use
                 )
             ))
                 n)  ; Pasa n como el valor inicial de x.
@@ -191,7 +191,7 @@
 
 (define cocientenat (lambda (n)
                       (lambda (m)
-                        (((escero m) (lambda (no_use) false) (lambda (no_use) ((cocientenataux n) m))) zero))))
+                        (((escero m) (lambda (no_use) false) (lambda (no_use) ((cocientenataux n) m))) cero))))
 
 ;; Máximo común denominador.
 
@@ -201,16 +201,16 @@
             (((Y (lambda (f)
                    (lambda (x)
                      (lambda(y)
-                      (((escero y)  
+                      (((escero y)
                        (lambda (no_use)
                             x
-                        ) 
-                       (lambda (no_use)
-                            ((f y)((restonat x) y)) 
                         )
-                        
+                       (lambda (no_use)
+                            ((f y)((restonat x) y))
+                        )
+
                     )
-                        zero)    ; Pasa zero como argumento de no_use
+                        cero)    ; Pasa cero como argumento de no_use
                 ))
             ))
                 n) ; Pasa n como el valor inicial de x.
@@ -221,7 +221,7 @@
 ;;;; Paridad
 
 (define par? (lambda (n)
-               (escero ((restonat n) deux))))
+               (escero ((restonat n) dos))))
 
 (define cuadrado (lambda (n)
                    ((prodnat n) n)))
@@ -236,17 +236,17 @@
                 (lambda (y)
                     (((escero y)
                         (lambda (no_use)
-                            un
+                            uno
                         )
                         (lambda (no_use)
                           (((par? y)
                            (lambda (no_use1)
-                             (cuadrado (f ((cocientenat y) deux))))
+                             (cuadrado (f ((cocientenat y) dos))))
                            (lambda (no_use1)
-                             ((prodnat n) (f (predecesor y))))) zero)
+                             ((prodnat n) (f (predecesor y))))) cero)
                         )
                     )
-                        zero)    ; Pasa zero como argumento de no_use
+                        cero)    ; Pasa cero como argumento de no_use
                 )
             ))
                 m)  ; Pasa n como el valor inicial de x.
@@ -255,100 +255,100 @@
 )
 
 ;;;;;; Definición de algunos enteros. Se codifican los enteros mediante pares de naturales: el par (m,n) es una representación de m-n. Es obvio que varios
-;;;;;; pares codifican el mismo entero. Por ejemplo, (7,5)=(9,7). Por lo tanto, los enteros se definen como el conjunto cociente de NxN mediante la relación 
+;;;;;; pares codifican el mismo entero. Por ejemplo, (7,5)=(9,7). Por lo tanto, los enteros se definen como el conjunto cociente de NxN mediante la relación
 ;;;;;; de equivalencia R dada por
 ;;;;;;
 ;;;;;;                     (m,n) R (m',n') si y solo si m-n=m'-n'
 
-(define cero ((par zero) zero))
+(define cero ((par cero) cero))
 
-(define -uno ((par zero) un))
+(define -uno ((par cero) uno))
 
-(define -dos ((par zero) deux))
+(define -dos ((par cero) dos))
 
-(define -tres ((par zero) trois))
+(define -tres ((par cero) tres))
 
-(define -cuatro ((par zero) quatre))
+(define -cuatro ((par cero) cuatro))
 
-(define -cinco ((par zero) cinq))
+(define -cinco ((par cero) cinco))
 
-(define -seis ((par zero) six))
+(define -seis ((par cero) seis))
 
-(define -siete ((par zero) sept))
+(define -siete ((par cero) siete))
 
-(define -ocho ((par zero) huit))
+(define -ocho ((par cero) ocho))
 
-(define -nueve ((par zero) neuf))
+(define -nueve ((par cero) nueve))
 
-(define -diez ((par zero) dix))
+(define -diez ((par cero) diez))
 
-(define -once ((par zero) onze))
+(define -once ((par cero) once))
 
-(define -doce ((par zero) douze))
+(define -doce ((par cero) doce))
 
-(define -trece ((par zero) treize))
+(define -trece ((par cero) trece))
 
-(define -catorce ((par zero) quatorze))
+(define -catorce ((par cero) catorce))
 
-(define -quince ((par zero) quinze))
+(define -quince ((par cero) quince))
 
-(define -dieciseis ((par zero) seize))
+(define -diez-seis ((par cero) diez-seis))
 
-(define -diecisiete ((par zero) dix-sept))
+(define -diecisiete ((par cero) diez-siete))
 
-(define -dieciocho ((par zero) dix-huit))
+(define -dieciocho ((par cero) diez-ocho))
 
-(define -diecinueve ((par zero) dix-neuf))
+(define -diecinueve ((par cero) diez-nueve))
 
-(define -veinte ((par zero) vingt))
+(define -veinte ((par cero) vingt))
 
-(define uno ((par un) zero))
+(define uno ((par uno) cero))
 
-(define dos ((par deux) zero))
+(define dos ((par dos) cero))
 
-(define tres ((par trois) zero))
+(define tres ((par tres) cero))
 
-(define cuatro ((par quatre) zero))
+(define cuatro ((par cuatro) cero))
 
-(define cinco ((par cinq) zero))
+(define cinco ((par cinco) cero))
 
-(define seis ((par six) zero))
+(define seis ((par seis) cero))
 
-(define siete ((par sept) zero))
+(define siete ((par siete) cero))
 
-(define ocho ((par huit) zero))
+(define ocho ((par ocho) cero))
 
-(define nueve ((par neuf) zero))
+(define nueve ((par nueve) cero))
 
-(define diez ((par dix) zero))
+(define diez ((par diez) cero))
 
-(define once ((par onze) zero))
+(define once ((par once) cero))
 
-(define doce ((par douze) zero))
+(define doce ((par doce) cero))
 
-(define trece ((par treize) zero))
+(define trece ((par trece) cero))
 
-(define catorce ((par quatorze) zero))
+(define catorce ((par catorce) cero))
 
-(define quince ((par quinze) zero))
+(define quince ((par quince) cero))
 
-(define dieciseis ((par seize) zero))
+(define diez-seis ((par diez-seis) cero))
 
-(define diecisiete ((par dix-sept) zero))
+(define diecisiete ((par diez-siete) cero))
 
-(define dieciocho ((par dix-huit) zero))
+(define dieciocho ((par diez-ocho) cero))
 
-(define diecinueve ((par dix-neuf) zero))
+(define diecinueve ((par diez-nueve) cero))
 
-(define veinte ((par vingt) zero))
+(define veinte ((par vingt) cero))
 
-;;;;; Orden, valor absoluto y tests de nulidad, positividad y negatividad. 
+;;;;; Orden, valor absoluto y tests de nulidad, positividad y negatividad.
 ;;;
 ;;; m-n > m'-n' si y solo si m+n' > m'+n e igual con el resto
 
 (define esmayoroigualent (lambda (r)
                            (lambda (s)
-                             ((esmayoroigualnat ((sumnat (primero r)) (segundo s))) ((sumnat (primero s)) (segundo r)))))) 
+                             ((esmayoroigualnat ((sumnat (primero r)) (segundo s))) ((sumnat (primero s)) (segundo r))))))
 
 (define esmenoroigualent (lambda (r)
                            (lambda (s)
@@ -367,7 +367,7 @@
                              ((esigualnat ((sumnat (primero r)) (segundo s))) ((sumnat (primero s)) (segundo r))))))
 
 (define absoluto (lambda (r)
-                    (((esmayoroigualnat (primero r)) (segundo r)) ((par ((restanat (primero r)) (segundo r))) zero) ((par ((restanat (segundo r)) (primero r))) zero))))
+                    (((esmayoroigualnat (primero r)) (segundo r)) ((par ((restanat (primero r)) (segundo r))) cero) ((par ((restanat (segundo r)) (primero r))) cero))))
 
 (define negativo (lambda (r)
                    ((esmenorent r) cero)))
@@ -377,18 +377,18 @@
 
 (define esceroent (lambda (r)
                      ((esigualnat (primero r)) (segundo r))))
-                      
+
 (define noesceroent (lambda (r)
                        (neg (esceroent r))))
 
 ;;;;; Reducción a representante canónico de la clase de equivalencia.
 
 (define reducir (lambda (r)
-                  (((esmayoroigualnat (primero r)) (segundo r)) 
-                        ((par ((restanat (primero r)) (segundo r))) zero)
-                        ((par zero) ((restanat (segundo r)) (primero r))))))
+                  (((esmayoroigualnat (primero r)) (segundo r))
+                        ((par ((restanat (primero r)) (segundo r))) cero)
+                        ((par cero) ((restanat (segundo r)) (primero r))))))
 
-;;;;; Aritmética entera. La respuesta está siempre dada por el representante canónico de la clase de equivalencia. 
+;;;;; Aritmética entera. La respuesta está siempre dada por el representante canónico de la clase de equivalencia.
 
 (define testenteros (lambda (r)
                       (- (comprobar (primero r)) (comprobar (segundo r)))))
@@ -400,7 +400,7 @@
 (define prodent (lambda (r)
                   (lambda (s)
                     (reducir ((par ((sumnat ((prodnat (primero r)) (primero s))) ((prodnat (segundo r)) (segundo s))))
-                          ((sumnat ((prodnat (primero r)) (segundo s))) ((prodnat (segundo r)) (primero s))))))))                       
+                          ((sumnat ((prodnat (primero r)) (segundo s))) ((prodnat (segundo r)) (primero s))))))))
 
 (define restaent (lambda (r)
                    (lambda (s)
@@ -424,15 +424,15 @@
 
 (define cocienteentaux-caso1 (lambda (r)
                                (lambda (s)
-                                  ((or (and ((esmayoroigualent r) cero) (positivo s)) (and (negativo r) (negativo s))) ((par ((cocientenat (primero (absoluto r))) (primero (absoluto s)))) zero)
-                                                                                                                       ((par zero) ((cocientenat (primero (absoluto r))) (primero (absoluto s))))))))
-                              
+                                  ((or (and ((esmayoroigualent r) cero) (positivo s)) (and (negativo r) (negativo s))) ((par ((cocientenat (primero (absoluto r))) (primero (absoluto s)))) cero)
+                                                                                                                       ((par cero) ((cocientenat (primero (absoluto r))) (primero (absoluto s))))))))
+
 ; Caso 2: resto no nulo
 
 (define cocienteentaux-caso2 (lambda (r)
                                 (lambda (s)
-                                    (((esmayoroigualent r) cero) ((positivo s) ((par ((cocienteent_aux r) s)) zero) ((par zero) ((cocienteent_aux r) s)))
-                                                                 ((positivo s) ((par zero) (sucesor ((cocienteent_aux r) s))) ((par (sucesor ((cocienteent_aux r) s))) zero))))))
+                                    (((esmayoroigualent r) cero) ((positivo s) ((par ((cocienteent_aux r) s)) cero) ((par cero) ((cocienteent_aux r) s)))
+                                                                 ((positivo s) ((par cero) (sucesor ((cocienteent_aux r) s))) ((par (sucesor ((cocienteent_aux r) s))) cero))))))
 ; Cociente cuando no hay división por cero
 
 (define cocienteentaux (lambda (r)
@@ -443,14 +443,14 @@
 
 (define cocienteent (lambda (r)
                       (lambda (s)
-                        (((esceroent s) (lambda (no_use) false) (lambda (no_use) ((cocienteentaux r) s))) zero))))
+                        (((esceroent s) (lambda (no_use) false) (lambda (no_use) ((cocienteentaux r) s))) cero))))
 
 ; Resto. Si se divide por cero, devuelve false
 
 (define restoentaux1 (lambda (r)
                         (lambda (s)
-                          ((or (and ((esmayoroigualent r) cero) (positivo s)) (and ((esmayoroigualent r) cero) (negativo s))) ((par ((restonat (primero (absoluto r))) (primero (absoluto s)))) zero)
-                                                                                                           ((par ((restanat (primero (absoluto s)))((restonat (primero (absoluto r))) (primero (absoluto s))))) zero)))))
+                          ((or (and ((esmayoroigualent r) cero) (positivo s)) (and ((esmayoroigualent r) cero) (negativo s))) ((par ((restonat (primero (absoluto r))) (primero (absoluto s)))) cero)
+                                                                                                           ((par ((restanat (primero (absoluto s)))((restonat (primero (absoluto r))) (primero (absoluto s))))) cero)))))
 
 (define restoentaux (lambda (r)
                        (lambda (s)
@@ -458,13 +458,13 @@
 
 (define restoent (lambda (r)
                       (lambda (s)
-                        (((esceroent s) (lambda (no_use) false) (lambda (no_use) ((restoentaux r) s))) zero))))
+                        (((esceroent s) (lambda (no_use) false) (lambda (no_use) ((restoentaux r) s))) cero))))
 
 ;; Como mcd (r,s)=mcd(|r|,|s|), se tiene
 
 (define mcdent (lambda (r)
                  (lambda (s)
-                   ((par ((mcdnat (primero (absoluto r))) (primero (absoluto s)))) zero))))
+                   ((par ((mcdnat (primero (absoluto r))) (primero (absoluto s)))) cero))))
 
 ;; Mínimo común múltiplo
 
