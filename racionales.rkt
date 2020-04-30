@@ -4,7 +4,7 @@
 (include "enteros.rkt")
 
 (define test_racionales (lambda (r)
-                      (/ (comprobar (primero r)) (comprobar (segundo r)))))
+                      ((comprobar (primero r)) (comprobar (segundo r)))))
 
 ;; Obtiene la reducciona canónica de un número racional
 (define reduc_canonica
