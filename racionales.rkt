@@ -28,7 +28,7 @@
   )
 )
 
-(define suma_racional
+(define suma_racionales
   (lambda (num1)
     (lambda (num2)
         (reduc_canonica
@@ -42,7 +42,7 @@
    )
 )
 
-(define resta_racional
+(define resta_racionales
   (lambda (num1)
     (lambda (num2)
       (reduc_canonica
