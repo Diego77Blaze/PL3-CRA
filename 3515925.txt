@@ -85,6 +85,12 @@
 (define matriz_prueba1 ((((definir_matriz ((par dos) cuatro)) ((par cuatro) cuatro)) ((par -uno) cuatro)) ((par cinco) cuatro)))
 (define matriz_prueba2 ((((definir_matriz ((par uno) cuatro))   ((par -cuatro) seis))     ((par dos) ocho)) ((par -dos) tres)))
 (define matriz_prueba3 ((((definir_matriz ((par uno) dos))   ((par -cuatro) dos))     ((par dos) dos)) ((par -tres) dos)))
+
+(define identidad ((((definir_matriz ((par un) un)) ((par zero) un)) ((par zero) un)) ((par un) un)))
+(define matriz_nula ((((definir_matriz ((par zero) un)) ((par zero) un)) ((par zero) un)) ((par zero) un)))
+(define matriz_prueba1 ((((definir_matriz ((par deux) quatre)) ((par quatre) quatre)) ((par un) quatre)) ((par cinq) quatre)))
+(define matriz_prueba2 ((((definir_matriz ((par un) quatre))   ((par quatre) six))     ((par deux) huit)) ((par deux) trois)))
+(define matriz_prueba3 ((((definir_matriz ((par un) deux))   ((par quatre) deux))     ((par deux) deux)) ((par trois) deux)))
 ; --------------------------------------
 
 (test_matriz identidad)
