@@ -5,7 +5,7 @@
 
 ;; Test para comprobar operaciones con números racionales
 (define test_racionales (lambda (r)
-                      (cons (comprobar (primero r)) (comprobar (segundo r)))))
+                      (list (comprobar (primero r)) (comprobar (segundo r)))))
 
 ;; Verifica si el número es 0
 (define escero_racional
@@ -143,14 +143,6 @@
     )
   )
 
-;;(define equal_num
-;;  (lambda (num1)
-;;    (lambda (num2)
-      
-;;      )
-;;    )
-;;  )
-
 ;; Verifica si dos números racionales son iguales
 (define esigual_racional
   (lambda (num1)
@@ -184,6 +176,67 @@
              (primero num2))
             (segundo num2))))
          zero)))
+      )
+    )
+  )
+
+(define definir_matriz
+  (lambda (a)
+    (lambda (b)
+      (lambda (c)
+        (lambda (d)
+          ((par ((par a) b)) ((par c) d))))))
+  )
+
+
+(define test_matriz
+  (lambda (m)
+    (list (list (test_racionales (primero (primero m))) (test_racionales (segundo (primero m))))
+          (list (test_racionales (primero (segundo m))) (test_racionales (segundo (segundo m))))
+          )
+    )
+  )
+
+(define suma_matrices
+  (lambda (matriz1)
+    (lambda (matriz2)
+      ((((definir_matriz
+           ((suma_racionales (primero (primero matriz1))) (primero (primero matriz2))))
+         ((suma_racionales (segundo (primero matriz1))) (segundo (primero matriz2))))
+        ((suma_racionales (primero (segundo matriz1))) (primero (segundo matriz2))))
+       ((suma_racionales (segundo (segundo matriz1))) (segundo (segundo matriz2))))
+      )  
+    )
+  )
+
+(define resta_matrices
+  (lambda (matriz1)
+    (lambda (matriz2)
+      ((((definir_matriz
+           ((resta_racionales (primero (primero matriz1))) (primero (primero matriz2))))
+         ((resta_racionales (segundo (primero matriz1))) (segundo (primero matriz2))))
+        ((resta_racionales (primero (segundo matriz1))) (primero (segundo matriz2))))
+       ((resta_racionales (segundo (segundo matriz1))) (segundo (segundo matriz2))))
+      )  
+    )
+  )
+
+(define prod_matrices
+  (lambda (matriz1)
+    (lambda (matriz2)
+      ((((definir_matriz
+           ((suma_racionales
+             ((prod_racionales (primero (primero matriz1))) (primero (primero matriz2))))
+             ((prod_racionales (segundo (primero matriz1))) (primero (segundo matriz2)))))
+           ((suma_racionales
+             ((prod_racionales (primero (primero matriz1))) (segundo (primero matriz2))))
+             ((prod_racionales (segundo (primero matriz1))) (segundo (segundo matriz2)))))
+           ((suma_racionales
+             ((prod_racionales (primero (segundo matriz1))) (primero (primero matriz2))))
+             ((prod_racionales (segundo (segundo matriz1))) (primero (segundo matriz2)))))
+           ((suma_racionales
+             ((prod_racionales (primero (segundo matriz1))) (segundo (primero matriz2))))
+             ((prod_racionales (segundo (segundo matriz1))) (segundo (segundo matriz2)))))
       )
     )
   )
