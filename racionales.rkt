@@ -240,3 +240,12 @@
       )
     )
   )
+
+(define determinante
+  (lambda (matriz)
+    ((resta_racionales
+      ((prod_racionales (primero (primero matriz))) (segundo (segundo matriz))))
+     ((prod_racionales (segundo (primero matriz))) (primero (segundo matriz)))
+     )
+    )
+  )
