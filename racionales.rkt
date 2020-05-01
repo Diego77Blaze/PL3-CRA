@@ -249,3 +249,36 @@
      )
     )
   )
+
+(define potecia_matricesaux
+    (lambda (matriz)
+        (lambda (num)
+            ((Y (lambda (f)
+                   (lambda (n)
+                     ((((esigualnat n) un)
+                       (lambda (no_use)
+                         matriz
+                         )
+                       (lambda (no_use)
+                         ((prod_matrices matriz) (f (predecesor n)))
+                         )
+                       )
+                      zero)    ; Pasa zero como argumento de no_use
+                     )
+                    )
+                  )
+             num)
+        )
+      )
+  )
+
+(define potencia_matrices
+  (lambda (matriz)
+    (lambda (num)
+      (((escero num)
+        (lambda (no_use) matriz)
+        (lambda (no_use) ((potecia_matricesaux matriz) num))) zero)
+      )
+    )
+  )
+
