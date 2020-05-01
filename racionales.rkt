@@ -142,7 +142,54 @@
      )
     )
   )
+;;Devuelve true si la primero fraccion es mayor y false si la segunda es mayor
+;; funciona con los numeros en español pero solo positivos
+#|
+(define mayor_racional
+  (lambda (num1)
+    (lambda (num2)
+      ((esmayorent
+            ((prodent
+              ((par (primero num1)) zero))
+             ((cocienteent 
+              ((mcment
+                ((par (segundo num1)) zero))
+               ((par (segundo num2)) zero)))
+              ((par (segundo num1)) zero))))
+            ((prodent
+              ((par (primero num2)) zero))
+             ((cocienteent
+              ((mcment
+                ((par (segundo num1)) zero))
+               ((par(segundo num2)) zero)))
+              ((par (segundo num2)) zero))))
+      )
+    )
+  )
+esta funcion del comentario funciona con los numeros en frances
+|#
 
+(define mayor_racional
+  (lambda (num1)
+    (lambda (num2)
+      ((esmayorent
+            ((prodent
+              ((par (primero(reducir(primero num1)))) zero))
+             ((cocienteent 
+              ((mcment
+                ((par (primero(reducir(segundo num1)))) zero))
+               ((par (primero(reducir(segundo num2)))) zero)))
+              ((par (primero(reducir(segundo num1)))) zero))))
+            ((prodent
+              ((par (primero(reducir(primero num2)))) zero))
+             ((cocienteent
+              ((mcment
+                ((par (primero(reducir(segundo num1)))) zero))
+               ((par (primero(reducir(segundo num2)))) zero)))
+              ((par (primero(reducir(segundo num2)))) zero))))
+      )
+    )
+  )
 ;; Verifica si dos números racionales son iguales
 (define esigual_racional
   (lambda (num1)
