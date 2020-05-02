@@ -5,21 +5,21 @@
 
 ;; Test para comprobar operaciones con números racionales
 (define test_racionales (lambda (r)
-                      (list (comprobar (primero r)) (comprobar (segundo r)))))
+                      (list (testenteros (primero r)) (testenteros (segundo r)))))
 
 ;; Verifica si el número es 0
 (define escero_racional
   (lambda (x)
     (escero (primero x))
     )
-)
+  )
 
 ;; Verifica si el número no es 0
 (define noescero_racional
   (lambda (x)
-    (escero (primero x))
+    (neg(escero (primero x)))
     )
-)
+  )
 
 ;; Obtiene la reducciona canónica de un número racional positivo
 (define reduc_canonica
@@ -28,89 +28,80 @@
       ;; Se obtiene el cociente de la división del dividendo como del divisor de la
       ;; la fracción diviendolos ambos entre el mcd entre ambos
       ((par
-        (primero
-          ((cocienteent ((par x) zero))
-           ((mcdent ((par x) zero)) ((par y) zero)))
-          )
-         )
-       (primero
-        ((cocienteent ((par y) zero))
-         ((mcdent ((par x) zero)) ((par y) zero)))))      
-     )
-   )
-)
+        ((cocienteent x)
+         ((mcdent x) y))
+        )
+       ((cocienteent y)
+        ((mcdent x) y)))
+      )
+    )
+  )
 ;; Obtiene la suma de dos números racionales
 (define suma_racionales
   (lambda (num1)
     (lambda (num2)
         ((reduc_canonica
-         (primero
           ((sument
             ((prodent
-              ((par (primero num1)) zero))
+              (primero num1))
              ((cocienteent ;; Obtiene el cociente entre el mcm entre los divisores y el divisor trabajado de la fracción
+               ((mcment
+                 (segundo num1))
+                (segundo num2)))
+              (segundo num1))))
+           ((prodent
+             (primero num2))
+            ((cocienteent ;; Obtiene el cociente entre el mcm entre los divisores y el divisor trabajado de la fracción
               ((mcment
-                ((par (segundo num1)) zero))
-               ((par (segundo num2)) zero)))
-              ((par (segundo num1)) zero))))
-            ((prodent
-              ((par (primero num2)) zero))
-             ((cocienteent ;; Obtiene el cociente entre el mcm entre los divisores y el divisor trabajado de la fracción
-              ((mcment
-                ((par (segundo num1)) zero))
-               ((par (segundo num2)) zero)))
-              ((par (segundo num2)) zero))))))
-         (primero
-          ((mcment((par (segundo num1)) zero))((par (segundo num2)) zero)))
+                (segundo num1))
+               (segundo num2)))
+             (segundo num2)))))
+         ((mcment(segundo num1))(segundo num2))
          )
-     )
-   )
-)
+      )
+    )
+  )
 
 ;; Obtiene la resta de dos números racionales
 (define resta_racionales
   (lambda (num1)
     (lambda (num2)
       ((reduc_canonica
-         (primero
-          ((restaent
-            ((prodent
-              ((par (primero num1)) zero))
-             ((cocienteent ;; Obtiene el cociente entre el mcm entre los divisores y el divisor trabajado de la fracción
-              ((mcment
-                ((par (segundo num1)) zero))
-               ((par (segundo num2)) zero)))
-              ((par (segundo num1)) zero))))
-            ((prodent
-              ((par (primero num2)) zero))
-             ((cocienteent ;; Obtiene el cociente entre el mcm entre los divisores y el divisor trabajado de la fracción
-              ((mcment
-                ((par (segundo num1)) zero))
-               ((par (segundo num2)) zero)))
-              ((par (segundo num2)) zero))))))
-         (primero
-          ((mcment((par (segundo num1)) zero))((par (segundo num2)) zero)))
-         )
-     )
-   )
-)
+        ((restaent
+          ((prodent
+            (primero num1))
+           ((cocienteent ;; Obtiene el cociente entre el mcm entre los divisores y el divisor trabajado de la fracción
+             ((mcment
+               (segundo num1))
+              (segundo num2)))
+            (segundo num1))))
+         ((prodent
+           (primero num2))
+          ((cocienteent ;; Obtiene el cociente entre el mcm entre los divisores y el divisor trabajado de la fracción
+            ((mcment
+              (segundo num1))
+             (segundo num2)))
+           (segundo num2)))))
+       ((mcment(segundo num1))(segundo num2))
+       )
+      )
+    )
+  )
 
 ;; Obtiene el producto de dos números racionales
 (define prod_racionales
   (lambda (num1)
     (lambda (num2)
       ((reduc_canonica
-        (primero
-         ((prodent ;; Producto de los dividendos de los números
-           ((par (primero num1)) zero))
-          ((par (primero num2)) zero))
-         ))
-       (primero
-         ((prodent ;; Producto de los divisores de los dos números
-           ((par (segundo num1)) zero))
-          ((par (segundo num2)) zero))
-         ))
-        )
+        ((prodent ;; Producto de los dividendos de los números
+          (primero num1))
+         (primero num2))
+         )
+       ((prodent ;; Producto de los divisores de los dos números
+         (segundo num1))
+        (segundo num2))
+         )
+      )
     )
   )
 
@@ -119,17 +110,15 @@
   (lambda (num1)
     (lambda (num2)
       ((reduc_canonica
-        (primero
-         ((prodent ;; Producto de el dividendo del primer número y el divisor del segundo
-           ((par (primero num1)) zero))
-          ((par (primero (inverso_racionales num2))) zero))
-         ))
-       (primero
-         ((prodent ;; Producto de el divisor del primer número y el dividendo del segundo
-           ((par (segundo num1)) zero))
-          ((par (segundo (inverso_racionales num2))) zero))
-         ))
+        ((prodent ;; Producto de el dividendo del primer número y el divisor del segundo
+          (primero num1))
+         (primero (inverso_racionales num2)))
         )
+       ((prodent ;; Producto de el divisor del primer número y el dividendo del segundo
+         (segundo num1))
+        (segundo (inverso_racionales num2)))
+       )
+      )
     )
   )
 
@@ -142,9 +131,8 @@
      )
     )
   )
-;;Devuelve true si la primero fraccion es mayor y false si la segunda es mayor
-;; funciona con los numeros en español pero solo positivos
-#|
+
+;; Verifica si una fracción es mayor que otra
 (define mayor_racional
   (lambda (num1)
     (lambda (num2)
@@ -166,30 +154,7 @@
       )
     )
   )
-esta funcion del comentario funciona con los numeros en frances
-|#
 
-(define mayor_racional
-  (lambda (num1)
-    (lambda (num2)
-      ((esmayorent
-            ((prodent
-              ((par (primero(reducir(primero num1)))) zero))
-             ((cocienteent 
-              ((mcment
-                ((par (primero(reducir(segundo num1)))) zero))
-               ((par (primero(reducir(segundo num2)))) zero)))
-              ((par (primero(reducir(segundo num1)))) zero))))
-            ((prodent
-              ((par (primero(reducir(primero num2)))) zero))
-             ((cocienteent
-              ((mcment
-                ((par (primero(reducir(segundo num1)))) zero))
-               ((par (primero(reducir(segundo num2)))) zero)))
-              ((par (primero(reducir(segundo num2)))) zero))))
-      )
-    )
-  )
 ;; Verifica si dos números racionales son iguales
 (define esigual_racional
   (lambda (num1)
@@ -198,35 +163,33 @@ esta funcion del comentario funciona con los numeros en frances
        ;; Las reducciones canónicas de los dividendos tienen que ser iguales
        ;; entre sí al igual que lo deben entre sí los divisores
        ((esigualent
-         ((par
-          (primero
-           ((reduc_canonica
-             (primero num1))
-            (segundo num1))))
-          zero))
-         ((par
-           (primero
-            ((reduc_canonica
-              (primero num2))
-             (segundo num2))))
-          zero))
+         (primero
+          ((reduc_canonica
+            (primero num1))
+           (segundo num1)))
+         )
+        (primero
+         ((reduc_canonica
+           (primero num2))
+          (segundo num2)))
+        )
        ((esigualent
-         ((par
-           (segundo
-            ((reduc_canonica
-              (primero num1))
-             (segundo num1))))
-          zero))
-        ((par
-          (segundo
-           ((reduc_canonica
-             (primero num2))
-            (segundo num2))))
-         zero)))
+         (segundo
+          ((reduc_canonica
+            (primero num1))
+           (segundo num1)))
+        )
+        (segundo
+         ((reduc_canonica
+           (primero num2))
+          (segundo num2)))
+        )
+       )
       )
     )
   )
 
+;; Define la estructura de una matriz 2x2
 (define definir_matriz
   (lambda (a)
     (lambda (b)
@@ -235,7 +198,7 @@ esta funcion del comentario funciona con los numeros en frances
           ((par ((par a) b)) ((par c) d))))))
   )
 
-
+;; Test para comprobar operaciones con matrices
 (define test_matriz
   (lambda (m)
     (list (list (test_racionales (primero (primero m))) (test_racionales (segundo (primero m))))
@@ -244,6 +207,7 @@ esta funcion del comentario funciona con los numeros en frances
     )
   )
 
+;; Realiza la suma de dos matrices
 (define suma_matrices
   (lambda (matriz1)
     (lambda (matriz2)
