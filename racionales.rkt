@@ -228,7 +228,7 @@
     )
   )
 
-;; Realiza la suma de dos matrices
+;; Realiza la suma de dos matrices 2x2
 (define suma_matrices
   (lambda (matriz1)
     (lambda (matriz2)
@@ -241,7 +241,7 @@
     )
   )
 
-;; Realiza la resta de dos matrices
+;; Realiza la resta de dos matrices 2x2
 (define resta_matrices
   (lambda (matriz1)
     (lambda (matriz2)
@@ -254,7 +254,7 @@
     )
   )
 
-;; Realiza el producto de dos matrices
+;; Realiza el producto de dos matrices 2x2
 (define prod_matrices
   (lambda (matriz1)
     (lambda (matriz2)
@@ -342,10 +342,10 @@
     )
   )
 
-;; Obtiene la matriz inversa de una matriz
-;; (test_matriz (inversa_matriz matriz_prueba1))
+;; Obtiene la matriz inversa de una matriz 
+;; (test_matriz (inversa matriz_prueba1))
 ;; '(((10 7) (2 7)) ((-8 7) (4 7)))
-(define inversa_matriz
+(define inversa
   (lambda (matriz)
     ((is_invertible matriz)
      ((producto_coeficiente_matriz (inverso_racionales (determinante matriz))) (adjunta_matriz matriz))
@@ -368,7 +368,7 @@
     )
   )
 
-;; Relacia la potencia de una matriz
+;; Realiza la potencia de una matriz
 (define potecia_matricesaux
     (lambda (matriz)
         (lambda (num)
@@ -400,7 +400,7 @@
       )
   )
 
-;; Relacia la potencia de una matriz
+;; Realiza la potencia de una matriz 
 (define potencia_matrices
   (lambda (matriz)
     (lambda (num)
