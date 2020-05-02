@@ -138,19 +138,19 @@
     (lambda (num2)
       ((esmayorent
             ((prodent
-              ((par (primero num1)) zero))
+              (primero num1))
              ((cocienteent 
               ((mcment
-                ((par (segundo num1)) zero))
-               ((par (segundo num2)) zero)))
-              ((par (segundo num1)) zero))))
+                (segundo num1))
+                (segundo num2)))
+              (segundo num1) )))
             ((prodent
-              ((par (primero num2)) zero))
+              (primero num2))
              ((cocienteent
               ((mcment
-                ((par (segundo num1)) zero))
-               ((par(segundo num2)) zero)))
-              ((par (segundo num2)) zero))))
+                (segundo num1) )
+               (segundo num2)))
+              (segundo num2) )))
       )
     )
   )
@@ -160,19 +160,19 @@
     (lambda (num2)
       ((esmenorent
             ((prodent
-              ((par (primero num1)) zero))
+              (primero num1))
              ((cocienteent 
               ((mcment
-                ((par (segundo num1)) zero))
-               ((par (segundo num2)) zero)))
-              ((par (segundo num1)) zero))))
+                (segundo num1))
+                (segundo num2)))
+              (segundo num1) )))
             ((prodent
-              ((par (primero num2)) zero))
+              (primero num2))
              ((cocienteent
               ((mcment
-                ((par (segundo num1)) zero))
-               ((par(segundo num2)) zero)))
-              ((par (segundo num2)) zero))))
+                (segundo num1) )
+               (segundo num2)))
+              (segundo num2) )))
       )
     )
   )
