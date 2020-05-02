@@ -154,7 +154,28 @@
       )
     )
   )
-
+;; Verifica si una fracción es menor que otra
+(define menor_racional
+  (lambda (num1)
+    (lambda (num2)
+      ((esmenorent
+            ((prodent
+              ((par (primero num1)) zero))
+             ((cocienteent 
+              ((mcment
+                ((par (segundo num1)) zero))
+               ((par (segundo num2)) zero)))
+              ((par (segundo num1)) zero))))
+            ((prodent
+              ((par (primero num2)) zero))
+             ((cocienteent
+              ((mcment
+                ((par (segundo num1)) zero))
+               ((par(segundo num2)) zero)))
+              ((par (segundo num2)) zero))))
+      )
+    )
+  )
 ;; Verifica si dos números racionales son iguales
 (define esigual_racional
   (lambda (num1)
