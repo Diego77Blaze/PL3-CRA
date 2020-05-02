@@ -220,6 +220,7 @@
     )
   )
 
+;; Realiza la resta de dos matrices
 (define resta_matrices
   (lambda (matriz1)
     (lambda (matriz2)
@@ -232,6 +233,7 @@
     )
   )
 
+;; Realiza el producto de dos matrices
 (define prod_matrices
   (lambda (matriz1)
     (lambda (matriz2)
@@ -252,6 +254,14 @@
     )
   )
 
+;; Realiza el cuadrado de una matriz
+(define cuadrado_matrices
+  (lambda (matriz)
+    ((prod_matrices matriz) matriz)
+    )
+  )
+
+;; Realiza el determinante de una matriz
 (define determinante
   (lambda (matriz)
     ((resta_racionales
