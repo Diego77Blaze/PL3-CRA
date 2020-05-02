@@ -282,7 +282,7 @@
     )
   )
 
-;; Realiza el determinante de una matriz
+;; Realiza el determinante de una matriz 2x2
 ;; (test_racionales(determinante identidad))
 ;; '(1 1)
 (define determinante
@@ -294,7 +294,7 @@
     )
   )
 
-;; Obtiene el rango de una matriz
+;; Obtiene el rango de una matriz 2x2
 ;; (testenteros(rango identidad))
 ;; 2
 (define rango
@@ -304,6 +304,67 @@
       (lambda (no_use) dos)
       )
      true)
+    )
+  )
+
+;; Verifica si una matriz es invertible o no
+;; (is_invertible identidad)
+(define is_invertible
+  (lambda (matriz)
+    (((escero_racional ((reduc_canonica (primero(determinante matriz))) (segundo(determinante matriz))))
+      (lambda (no_use) false)
+      (lambda (no_use) true)
+      )
+     true)
+    )
+  )
+
+;; Obtiene la matriz adjunta de una matriz 2x2
+;; (test_matriz (adjunta_matriz (inversa_matriz matriz_prueba1)))
+;; '(((5 4) (1 4)) ((-4 4) (2 4)))
+(define adjunta_matriz
+  (lambda (matriz)
+    ((((definir_matriz
+         (segundo (segundo matriz)))
+       ((negativo (primero(primero(segundo matriz))))
+        ;; Número negativo pasa a positivo
+        ((par (absoluto (primero(primero(segundo matriz)))))(segundo(primero(segundo matriz))))
+        ;; Número positivo pasa a negativo
+        ((par ((restaent cero) (primero(primero(segundo matriz))))) (segundo(primero(segundo matriz))))
+        ))
+      ((negativo (primero(segundo(primero matriz))))
+        ;; Número negativo pasa a positivo
+       ((par (absoluto (primero(segundo(primero matriz)))))(segundo(segundo(primero matriz))))
+       ;;Número positivo pasa a negativo
+        ((par ((restaent cero) (primero(segundo(primero matriz))))) (segundo(segundo(primero matriz))))
+       ))
+     (primero (primero matriz)))
+    )
+  )
+
+;; Obtiene la matriz inversa de una matriz
+;; (test_matriz (inversa_matriz matriz_prueba1))
+;; '(((10 7) (2 7)) ((-8 7) (4 7)))
+(define inversa_matriz
+  (lambda (matriz)
+    ((is_invertible matriz)
+     ((producto_coeficiente_matriz (inverso_racionales (determinante matriz))) (adjunta_matriz matriz))
+     matriz
+     )
+    )
+  )
+;; Aplica un valor a cada una de las posiciones de una matriz 2x2
+;; (test_matriz ((producto_coeficiente_matriz ((par dos) dos)) matriz_prueba1))
+;; '(((1 2) (1 1)) ((-1 4) (5 4)))
+(define producto_coeficiente_matriz
+  (lambda (valor)
+    (lambda (matriz)
+      ((((definir_matriz
+           ((prod_racionales valor) (primero(primero matriz))))
+         ((prod_racionales valor) (segundo(primero matriz))))
+        ((prod_racionales valor) (primero(segundo matriz))))
+       ((prod_racionales valor) (segundo(segundo matriz))))
+      )
     )
   )
 
