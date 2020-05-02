@@ -65,7 +65,7 @@
 
 ;MATRICES RACIONALES
 
-; ---- COPIAR EN FICHERO DE CÓDIGO ----
+; ---- COPIAR EN FICHERO DE CÃ“DIGO ----
 (define definir_matriz (lambda (a)
                          (lambda (b)
                            (lambda (c)
@@ -85,12 +85,6 @@
 (define matriz_prueba1 ((((definir_matriz ((par dos) cuatro)) ((par cuatro) cuatro)) ((par -uno) cuatro)) ((par cinco) cuatro)))
 (define matriz_prueba2 ((((definir_matriz ((par uno) cuatro))   ((par -cuatro) seis))     ((par dos) ocho)) ((par -dos) tres)))
 (define matriz_prueba3 ((((definir_matriz ((par uno) dos))   ((par -cuatro) dos))     ((par dos) dos)) ((par -tres) dos)))
-
-(define identidad ((((definir_matriz ((par un) un)) ((par zero) un)) ((par zero) un)) ((par un) un)))
-(define matriz_nula ((((definir_matriz ((par zero) un)) ((par zero) un)) ((par zero) un)) ((par zero) un)))
-(define matriz_prueba1 ((((definir_matriz ((par deux) quatre)) ((par quatre) quatre)) ((par un) quatre)) ((par cinq) quatre)))
-(define matriz_prueba2 ((((definir_matriz ((par un) quatre))   ((par quatre) six))     ((par deux) huit)) ((par deux) trois)))
-(define matriz_prueba3 ((((definir_matriz ((par un) deux))   ((par quatre) deux))     ((par deux) deux)) ((par trois) deux)))
 ; --------------------------------------
 
 (test_matriz identidad)
@@ -98,7 +92,7 @@
 (test_matriz matriz_prueba1)
 ;(((2 4) (4 4)) ((-1 4) (5 4)))
 (test_matriz matriz_prueba2)
-;(((1 8) (3 6)) ((-2 4) (-2 3)))
+;(((1 4) (-4 6)) ((2 8) (-2 3)))
 
 (inversa? matriz_prueba1)
 ;#<procedure:true>
@@ -124,12 +118,3 @@
 ;(((10 7) (-8 7)) ((2 7) (4 7)))
 (test_matriz ((prod_matrices matriz_prueba1) (inversa matriz_prueba1)))
 ;(((1 1) (0 1)) ((0 1) (1 1)))
-
-
-
-
-
-
-
-
-
