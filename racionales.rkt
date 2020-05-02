@@ -271,6 +271,7 @@
     )
   )
 
+;; Relacia la potencia de una matriz
 (define potecia_matricesaux
     (lambda (matriz)
         (lambda (num)
@@ -281,7 +282,16 @@
                          matriz
                          )
                        (lambda (no_use)
-                         ((prod_matrices matriz) (f (predecesor n)))
+                         (((par? n)
+                           ;; Exponente par
+                           (lambda (no_use1)
+                             (cuadrado_matrices (f ((cocientenat n) deux)))
+                             )
+                           ; Exponente impar
+                           (lambda (no_use1)
+                             ((prod_matrices matriz) (f (predecesor n)))
+                             )
+                           ) zero)
                          )
                        )
                       zero)    ; Pasa zero como argumento de no_use
@@ -293,6 +303,7 @@
       )
   )
 
+;; Relacia la potencia de una matriz
 (define potencia_matrices
   (lambda (matriz)
     (lambda (num)
