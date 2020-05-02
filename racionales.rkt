@@ -10,14 +10,14 @@
 ;; Verifica si el número es 0
 (define escero_racional
   (lambda (x)
-    (escero (primero x))
+    (esceroent (primero x))
     )
   )
 
 ;; Verifica si el número no es 0
 (define noescero_racional
   (lambda (x)
-    (neg(escero (primero x)))
+    (neg(escero_racional (primero x)))
     )
   )
 
@@ -283,12 +283,27 @@
   )
 
 ;; Realiza el determinante de una matriz
+;; (test_racionales(determinante identidad))
+;; '(1 1)
 (define determinante
   (lambda (matriz)
     ((resta_racionales
       ((prod_racionales (primero (primero matriz))) (segundo (segundo matriz))))
      ((prod_racionales (segundo (primero matriz))) (primero (segundo matriz)))
      )
+    )
+  )
+
+;; Obtiene el rango de una matriz
+;; (testenteros(rango identidad))
+;; 2
+(define rango
+  (lambda (matriz)
+    (((escero_racional ((reduc_canonica (primero(determinante matriz))) (segundo(determinante matriz))))
+      (lambda (no_use) uno)
+      (lambda (no_use) dos)
+      )
+     true)
     )
   )
 
