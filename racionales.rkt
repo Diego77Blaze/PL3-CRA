@@ -308,8 +308,8 @@
   )
 
 ;; Verifica si una matriz es invertible o no
-;; (is_invertible identidad)
-(define is_invertible
+;; (inversa? identidad)
+(define inversa?
   (lambda (matriz)
     (((escero_racional ((reduc_canonica (primero(determinante matriz))) (segundo(determinante matriz))))
       (lambda (no_use) false)
@@ -347,7 +347,7 @@
 ;; '(((10 7) (2 7)) ((-8 7) (4 7)))
 (define inversa
   (lambda (matriz)
-    ((is_invertible matriz)
+    ((inversa? matriz)
      ((producto_coeficiente_matriz (inverso_racionales (determinante matriz))) (adjunta_matriz matriz))
      matriz
      )
