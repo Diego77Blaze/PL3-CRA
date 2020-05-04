@@ -21,6 +21,14 @@
     )
   )
 
+;; Devuelve un número racional ajustando el los negativos que pueda tener y ajustar la doble negación como un número positivo
+;; y el negativo en el denominador como un número negativo pero que tiene el menos en el numerador
+(define ajustar_negativo_racional
+  (lambda (num)
+    ((negativo (segundo num)))
+    )
+  )
+
 ;; Obtiene la reducciona canónica de un número racional positivo
 (define reduc_canonica
   (lambda (x)
