@@ -27,9 +27,22 @@
 
 ;; Devuelve un número racional ajustando el los negativos que pueda tener y ajustar la doble negación como un número positivo
 ;; y el negativo en el denominador como un número negativo pero que tiene el menos en el numerador
+;; (test_racionales (ajustar_negativo_racional ((par uno) -uno)))
+;; (-1 1)
+;; (test_racionales (ajustar_negativo_racional ((par -uno) -uno)))
+;; (1 1)
+;; (test_racionales (ajustar_negativo_racional ((par uno) uno)))
+;; (1 1)
+
 (define ajustar_negativo_racional
   (lambda (num)
-    ((negativo (segundo num)))
+    ((negativo (segundo num)) ;; Denominador negativo
+     ((negativo (primero num)) ;; Numerador negativo
+      ((par (absoluto (primero num))) (absoluto (segundo num)))
+      ((par ((restaent cero) (primero num))) (absoluto (segundo num)))
+      )
+     num
+     )
     )
   )
 
@@ -41,12 +54,14 @@
     (lambda (y)
       ;; Se obtiene el cociente de la división del dividendo como del divisor de la
       ;; la fracción diviendolos ambos entre el mcd entre ambos
-      ((par
-        ((cocienteent x)
-         ((mcdent x) y))
+      (ajustar_negativo_racional 
+        ((par
+          ((cocienteent x)
+           ((mcdent x) y))
+          )
+         ((cocienteent y)
+          ((mcdent x) y)))
         )
-       ((cocienteent y)
-        ((mcdent x) y)))
       )
     )
   )
@@ -60,19 +75,19 @@
         ((reduc_canonica
           ((sument
             ((prodent
-              (primero num1))
+              (primero (ajustar_negativo_racional num1)))
              ((cocienteent ;; Obtiene el cociente entre el mcm entre los divisores y el divisor trabajado de la fracción
                ((mcment
-                 (segundo num1))
-                (segundo num2)))
-              (segundo num1))))
+                 (segundo (ajustar_negativo_racional num1)))
+                (segundo (ajustar_negativo_racional num2))))
+              (segundo (ajustar_negativo_racional num1)))))
            ((prodent
-             (primero num2))
+             (primero (ajustar_negativo_racional num2)))
             ((cocienteent ;; Obtiene el cociente entre el mcm entre los divisores y el divisor trabajado de la fracción
               ((mcment
-                (segundo num1))
-               (segundo num2)))
-             (segundo num2)))))
+                (segundo (ajustar_negativo_racional num1)))
+               (segundo (ajustar_negativo_racional num2))))
+             (segundo (ajustar_negativo_racional num2))))))
          ((mcment(segundo num1))(segundo num2))
          )
       )
@@ -88,20 +103,20 @@
       ((reduc_canonica
         ((restaent
           ((prodent
-            (primero num1))
+            (primero (ajustar_negativo_racional num1)))
            ((cocienteent ;; Obtiene el cociente entre el mcm entre los divisores y el divisor trabajado de la fracción
              ((mcment
-               (segundo num1))
-              (segundo num2)))
-            (segundo num1))))
+               (segundo (ajustar_negativo_racional num1)))
+              (segundo (ajustar_negativo_racional num2))))
+            (segundo (ajustar_negativo_racional num1)))))
          ((prodent
-           (primero num2))
+           (primero (ajustar_negativo_racional num2)))
           ((cocienteent ;; Obtiene el cociente entre el mcm entre los divisores y el divisor trabajado de la fracción
             ((mcment
-              (segundo num1))
-             (segundo num2)))
-           (segundo num2)))))
-       ((mcment(segundo num1))(segundo num2))
+              (segundo (ajustar_negativo_racional num1)))
+             (segundo (ajustar_negativo_racional num2))))
+           (segundo (ajustar_negativo_racional num2))))))
+       ((mcment(segundo (ajustar_negativo_racional num1)))(segundo (ajustar_negativo_racional num2)))
        )
       )
     )
@@ -115,12 +130,12 @@
     (lambda (num2)
       ((reduc_canonica
         ((prodent ;; Producto de los dividendos de los números
-          (primero num1))
-         (primero num2))
+          (primero (ajustar_negativo_racional num1)))
+         (primero (ajustar_negativo_racional num2)))
          )
        ((prodent ;; Producto de los divisores de los dos números
-         (segundo num1))
-        (segundo num2))
+         (segundo (ajustar_negativo_racional num1)))
+        (segundo (ajustar_negativo_racional num2)))
          )
       )
     )
@@ -134,12 +149,12 @@
     (lambda (num2)
       ((reduc_canonica
         ((prodent ;; Producto de el dividendo del primer número y el divisor del segundo
-          (primero num1))
-         (primero (inverso_racionales num2)))
+          (primero (ajustar_negativo_racional num1)))
+         (primero (inverso_racionales (ajustar_negativo_racional num2))))
         )
        ((prodent ;; Producto de el divisor del primer número y el dividendo del segundo
-         (segundo num1))
-        (segundo (inverso_racionales num2)))
+         (segundo (ajustar_negativo_racional num1)))
+        (segundo (inverso_racionales (ajustar_negativo_racional num2))))
        )
       )
     )
@@ -150,9 +165,11 @@
 ;(7 3)
 (define inverso_racionales
   (lambda (num)
-    ((reduc_canonica
-     (segundo num))
-     (primero num)
+    (ajustar_negativo_racional
+     ((reduc_canonica
+       (segundo num))
+      (primero num)
+      )
      )
     )
   )
@@ -165,19 +182,19 @@
     (lambda (num2)
       ((esmayorent
             ((prodent
-              (primero num1))
+              (primero (ajustar_negativo_racional num1)))
              ((cocienteent 
               ((mcment
-                (segundo num1))
-                (segundo num2)))
-              (segundo num1) )))
+                (segundo (ajustar_negativo_racional num1)))
+                (segundo(ajustar_negativo_racional num2))))
+              (segundo (ajustar_negativo_racional num1)))))
             ((prodent
-              (primero num2))
+              (primero (ajustar_negativo_racional num2)))
              ((cocienteent
               ((mcment
-                (segundo num1) )
-               (segundo num2)))
-              (segundo num2) )))
+                (segundo (ajustar_negativo_racional num1)))
+               (segundo (ajustar_negativo_racional num2))))
+              (segundo (ajustar_negativo_racional num2)))))
       )
     )
   )
@@ -190,19 +207,19 @@
     (lambda (num2)
       ((esmenorent
             ((prodent
-              (primero num1))
+              (primero (ajustar_negativo_racional num1)))
              ((cocienteent 
               ((mcment
-                (segundo num1))
-                (segundo num2)))
-              (segundo num1) )))
+                (segundo (ajustar_negativo_racional num1)))
+                (segundo (ajustar_negativo_racional num2))))
+              (segundo (ajustar_negativo_racional num1)))))
             ((prodent
-              (primero num2))
+              (primero (ajustar_negativo_racional num2)))
              ((cocienteent
               ((mcment
-                (segundo num1) )
-               (segundo num2)))
-              (segundo num2) )))
+                (segundo (ajustar_negativo_racional num1)))
+               (segundo (ajustar_negativo_racional num2))))
+              (segundo (ajustar_negativo_racional num2)))))
       )
     )
   )
@@ -217,25 +234,33 @@
        ;; entre sí al igual que lo deben entre sí los divisores
        ((esigualent
          (primero
-          ((reduc_canonica
-            (primero num1))
-           (segundo num1)))
+          (ajustar_negativo_racional
+           ((reduc_canonica
+             (primero num1))
+            (segundo num1)))
+          )
          )
         (primero
-         ((reduc_canonica
-           (primero num2))
-          (segundo num2)))
+         (ajustar_negativo_racional
+          ((reduc_canonica
+            (primero num2))
+           (segundo num2)))
+         )
         )
        ((esigualent
          (segundo
-          ((reduc_canonica
-            (primero num1))
-           (segundo num1)))
+          (ajustar_negativo_racional
+           ((reduc_canonica
+             (primero num1))
+            (segundo num1)))
+          )
         )
         (segundo
-         ((reduc_canonica
-           (primero num2))
-          (segundo num2)))
+         (ajustar_negativo_racional
+          ((reduc_canonica
+            (primero num2))
+           (segundo num2)))
+         )
         )
        )
       )
@@ -248,7 +273,7 @@
     (lambda (b)
       (lambda (c)
         (lambda (d)
-          ((par ((par a) b)) ((par c) d))))))
+          ((par ((par (ajustar_negativo_racional a)) (ajustar_negativo_racional b))) ((par (ajustar_negativo_racional c)) (ajustar_negativo_racional d)))))))
   )
 (define identidad ((((definir_matriz ((par uno) uno)) ((par cero) uno)) ((par cero) uno)) ((par uno) uno)))
 (define matriz_nula ((((definir_matriz ((par cero) uno)) ((par cero) uno)) ((par cero) uno)) ((par cero) uno)))
