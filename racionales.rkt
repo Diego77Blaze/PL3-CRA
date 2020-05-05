@@ -434,8 +434,8 @@
     (lambda (matriz)
       ((((definir_matriz
            ((prod_racionales valor) (primero(primero matriz))))
-         ((prod_racionales valor) (segundo(primero matriz))))
-        ((prod_racionales valor) (primero(segundo matriz))))
+         ((prod_racionales valor) (primero(segundo matriz))))
+        ((prod_racionales valor) (segundo(primero matriz))))
        ((prod_racionales valor) (segundo(segundo matriz))))
       )
     )
