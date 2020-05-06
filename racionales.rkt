@@ -142,8 +142,8 @@
   )
 
 ;; Obtiene la división de dos números racionales
-;;(test_racionales ((prod_racionales ((par cuatro) dos)) ((par cuatro) uno)))
-;;(8 1)
+;;(test_racionales ((div_racionales ((par cuatro) dos)) ((par cuatro) uno)))
+;;(1 2)
 (define div_racionales
   (lambda (num1)
     (lambda (num2)
@@ -266,7 +266,40 @@
       )
     )
   )
-
+;; Verifica si dos números racionales son mayor o iguales entre sí
+;;((mayorigual_racional ((par tres) cuatro)) ((par tres) cinco))
+;;#<procedure:true>
+;;((mayorigual_racional ((par tres) cinco)) ((par tres) cinco))
+;;#<procedure:true>
+;;((mayorigual_racional ((par tres) cinco)) ((par tres) cuatro))
+;;#<procedure:false>
+(define mayorigual_racional
+  (lambda(num1)
+    (lambda(num2)
+      (or
+       ((mayor_racional num1)num2)
+       ((esigual_racional num1)num2)
+       )
+      )
+   )
+ )
+;; Verifica si dos números racionales son menor o iguales entre sí
+;;((menorigual_racional ((par tres) cinco)) ((par tres) cinco))
+;;#<procedure:true>
+;;((menorigual_racional ((par tres) cuatro)) ((par tres) cinco))
+;;#<procedure:false>
+;;((menorigual_racional ((par tres) cinco)) ((par tres) cuatro))
+;;#<procedure:true>
+(define menorigual_racional
+  (lambda(num1)
+    (lambda(num2)
+      (or
+       ((menor_racional num1)num2)
+       ((esigual_racional num1)num2)
+       )
+      )
+   )
+ )
 ;; Define la estructura de una matriz 2x2
 (define definir_matriz
   (lambda (a)
@@ -275,6 +308,7 @@
         (lambda (d)
           ((par ((par (ajustar_negativo_racional a)) (ajustar_negativo_racional b))) ((par (ajustar_negativo_racional c)) (ajustar_negativo_racional d)))))))
   )
+;;Definición de matrices prueba
 (define identidad ((((definir_matriz ((par uno) uno)) ((par cero) uno)) ((par cero) uno)) ((par uno) uno)))
 (define matriz_nula ((((definir_matriz ((par cero) uno)) ((par cero) uno)) ((par cero) uno)) ((par cero) uno)))
 (define matriz_prueba1 ((((definir_matriz ((par dos) cuatro)) ((par cuatro) cuatro)) ((par -uno) cuatro)) ((par cinco) cuatro)))
@@ -345,6 +379,7 @@
     )
   )
 
+
 ;; Realiza el cuadrado de una matriz
 ;;(test_matriz (cuadrado_matrices matriz_prueba1))
 ;;(((0 1) (7 4)) ((-7 16) (21 16)))
@@ -393,7 +428,7 @@
   )
 
 ;; Obtiene la matriz adjunta de una matriz 2x2
-;; (test_matriz (adjunta_matriz (inversa_matriz matriz_prueba1)))
+;; (test_matriz (adjunta_matriz (inversa matriz_prueba1)))
 ;; '(((5 4) (1 4)) ((-4 4) (2 4)))
 (define adjunta_matriz
   (lambda (matriz)
