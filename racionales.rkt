@@ -267,6 +267,12 @@
     )
   )
 ;; Verifica si dos números racionales son mayor o iguales entre sí
+;;((mayorigual_racional ((par tres) cuatro)) ((par tres) cinco))
+;;#<procedure:true>
+;;((mayorigual_racional ((par tres) cinco)) ((par tres) cinco))
+;;#<procedure:true>
+;;((mayorigual_racional ((par tres) cinco)) ((par tres) cuatro))
+;;#<procedure:false>
 (define mayorigual_racional
   (lambda(num1)
     (lambda(num2)
@@ -278,6 +284,12 @@
    )
  )
 ;; Verifica si dos números racionales son menor o iguales entre sí
+;;((menorigual_racional ((par tres) cinco)) ((par tres) cinco))
+;;#<procedure:true>
+;;((menorigual_racional ((par tres) cuatro)) ((par tres) cinco))
+;;#<procedure:false>
+;;((menorigual_racional ((par tres) cinco)) ((par tres) cuatro))
+;;#<procedure:true>
 (define menorigual_racional
   (lambda(num1)
     (lambda(num2)
