@@ -428,7 +428,7 @@
   )
 ;; Aplica un valor a cada una de las posiciones de una matriz 2x2
 ;; (test_matriz ((producto_coeficiente_matriz ((par dos) dos)) matriz_prueba1))
-;; '(((1 2) (1 1)) ((-1 4) (5 4)))
+;; '(((1 2) (-1 4)) ((1 1) (5 4)))
 (define producto_coeficiente_matriz
   (lambda (valor)
     (lambda (matriz)
