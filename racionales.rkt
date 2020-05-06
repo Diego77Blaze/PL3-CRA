@@ -406,11 +406,18 @@
 ;; 2
 (define rango
   (lambda (matriz)
-    (((escero_racional ((reduc_canonica (primero(determinante matriz))) (segundo(determinante matriz))))
-      (lambda (no_use) uno)
-      (lambda (no_use) dos)
-      )
-     true)
+    (((and (escero_racional ((reduc_canonica (primero(primero(primero matriz)))) (segundo(primero(primero matriz)))))
+          (and (escero_racional ((reduc_canonica (primero(segundo(segundo matriz)))) (segundo(segundo(segundo matriz)))))
+           (escero_racional ((reduc_canonica (primero(determinante matriz))) (segundo(determinante matriz))))))
+     (lambda (no_use) cero)
+     (lambda (no_use)
+       (((escero_racional ((reduc_canonica (primero(determinante matriz))) (segundo(determinante matriz))))
+         (lambda (no_use2) uno)
+         (lambda (no_use2) dos)
+         )
+        true)
+       )
+     )true)
     )
   )
 
