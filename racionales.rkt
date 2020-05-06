@@ -266,7 +266,28 @@
       )
     )
   )
-
+;; Verifica si dos números racionales son mayor o iguales entre sí
+(define mayorigual_racional
+  (lambda(num1)
+    (lambda(num2)
+      (or
+       ((mayor_racional num1)num2)
+       ((esigual_racional num1)num2)
+       )
+      )
+   )
+ )
+;; Verifica si dos números racionales son menor o iguales entre sí
+(define menorigual_racional
+  (lambda(num1)
+    (lambda(num2)
+      (or
+       ((menor_racional num1)num2)
+       ((esigual_racional num1)num2)
+       )
+      )
+   )
+ )
 ;; Define la estructura de una matriz 2x2
 (define definir_matriz
   (lambda (a)
