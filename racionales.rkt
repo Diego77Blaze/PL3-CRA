@@ -1,10 +1,7 @@
-#lang racket
-
-(require racket/include)
-(include "enteros.rkt")
+(load "enteros.rkt")
 
 ;; Test para comprobar operaciones con números racionales
-;; '(1 2)
+;; (1 2)
 (define test_racionales (lambda (r)
                       (list (testenteros (primero r)) (testenteros (segundo r)))))
 
@@ -34,11 +31,11 @@
 ;; el numerador pasa a ser negativo y el denominador a positivo para permitir una mayor
 ;; facilidad y homogeneidad a los cálculos entre los racionales
 ;; (test_racionales (ajustar_negativo_racional ((par uno) -uno)))
-;; '(-1 1)
+;; (-1 1)
 ;; (test_racionales (ajustar_negativo_racional ((par -uno) -uno)))
-;; '(1 1)
+;; (1 1)
 ;; (test_racionales (ajustar_negativo_racional ((par uno) uno)))
-;; '(1 1)
+;; (1 1)
 
 (define ajustar_negativo_racional
   (lambda (num)
@@ -54,7 +51,7 @@
 
 ;; Obtiene la reducciona canónica de un número racional 
 ;; (test_racionales ((reduc_canonica dos)cuatro))
-;; '(1 2)
+;; (1 2)
 (define reduc_canonica
   (lambda (x)
     (lambda (y)
@@ -74,7 +71,7 @@
 
 ;; Obtiene la suma de dos números racionales
 ;; (test_racionales ((suma_racionales ((par uno) dos)) ((par uno) dos)))
-;; '(1 1)
+;; (1 1)
 (define suma_racionales
   (lambda (num1)
     (lambda (num2)
@@ -106,7 +103,7 @@
 
 ;; Obtiene la resta de dos números racionales
 ;; (test_racionales ((resta_racionales ((par siete) cinco)) ((par cuatro) cinco)))
-;; '(3 5)
+;; (3 5)
 (define resta_racionales
   (lambda (num1)
     (lambda (num2)
@@ -138,7 +135,7 @@
 
 ;; Obtiene el producto de dos números racionales
 ;; (test_racionales ((prod_racionales ((par uno) dos)) ((par cuatro) uno)))
-;; '(2 1)
+;; (2 1)
 (define prod_racionales
   (lambda (num1)
     (lambda (num2)
@@ -157,7 +154,7 @@
 
 ;; Obtiene la división de dos números racionales
 ;; (test_racionales ((div_racionales ((par cuatro) dos)) ((par cuatro) uno)))
-;; '(1 2)
+;; (1 2)
 (define div_racionales
   (lambda (num1)
     (lambda (num2)
@@ -176,7 +173,7 @@
 
 ;; Obtiene la fracción invertida
 ;; (test_racionales (inverso_racionales ((par tres) siete)))
-;; '(7 3)
+;; (7 3)
 (define inverso_racionales
   (lambda (num)
     (ajustar_negativo_racional ;; Se tiene  en cuenta si tiene algún valor negativo ya sea en el numerador o en el denominador para ajustar el resultado si es necesario
@@ -337,7 +334,7 @@
 
 ;; Test para comprobar operaciones con matrices
 ;; (test_matriz identidad)
-;; '(((1 1) (0 1)) ((0 1) (1 1)))
+;; (((1 1) (0 1)) ((0 1) (1 1)))
 (define test_matriz
   (lambda (m)
     (list (list (test_racionales (primero (primero m))) (test_racionales (segundo (primero m))))
@@ -348,7 +345,7 @@
 
 ;; Realiza la suma de dos matrices 2x2
 ;; (test_matriz ((suma_matrices matriz_prueba1) matriz_prueba2))
-;; '(((3 4) (1 3)) ((0 1) (7 12)))
+;; (((3 4) (1 3)) ((0 1) (7 12)))
 (define suma_matrices
   (lambda (matriz1)
     (lambda (matriz2)
@@ -363,7 +360,7 @@
 
 ;; Realiza la resta de dos matrices 2x2
 ;; (test_matriz ((resta_matrices matriz_prueba1) matriz_prueba2))
-;; '(((1 4) (5 3)) ((-1 2) (23 12)))
+;; (((1 4) (5 3)) ((-1 2) (23 12)))
 (define resta_matrices
   (lambda (matriz1)
     (lambda (matriz2)
@@ -378,7 +375,7 @@
 
 ;; Realiza el producto de dos matrices 2x2
 ;; (test_matriz ((prod_matrices matriz_prueba1) matriz_prueba2))
-;; '(((3 8) (-1 1)) ((1 4) (-2 3)))
+;; (((3 8) (-1 1)) ((1 4) (-2 3)))
 (define prod_matrices
   (lambda (matriz1)
     (lambda (matriz2)
@@ -410,7 +407,7 @@
 
 ;; Realiza el cuadrado de una matriz
 ;; (test_matriz (cuadrado_matrices matriz_prueba1))
-;; '(((0 1) (7 4)) ((-7 16) (21 16)))
+;; (((0 1) (7 4)) ((-7 16) (21 16)))
 (define cuadrado_matrices
   (lambda (matriz)
     ;; Realiza el producto de una matriz por si misma
@@ -420,7 +417,7 @@
 
 ;; Realiza el determinante de una matriz 2x2
 ;; (test_racionales(determinante identidad))
-;; '(1 1)
+;; (1 1)
 (define determinante
   (lambda (matriz)
     ((resta_racionales ;; Resta entre los resultados obtenidos de la diagonal principal y de la diagonal secundaria 
@@ -472,7 +469,7 @@
 
 ;; Obtiene la matriz adjunta de una matriz 2x2
 ;; (test_matriz (adjunta_matriz (inversa matriz_prueba1)))
-;; '(((5 4) (1 4)) ((-4 4) (2 4)))
+;; (((5 4) (1 4)) ((-4 4) (2 4)))
 (define adjunta_matriz
   (lambda (matriz)
     ((((definir_matriz
@@ -502,7 +499,7 @@
 
 ;; Obtiene la matriz inversa de una matriz 
 ;; (test_matriz (inversa matriz_prueba1))
-;; '(((10 7) (2 7)) ((-8 7) (4 7)))
+;; (((10 7) (2 7)) ((-8 7) (4 7)))
 (define inversa
   (lambda (matriz)
     ((inversa? matriz) ;; Se comprueba si se puede realizar la inversa
@@ -513,7 +510,7 @@
   )
 ;; Aplica un valor a cada una de las posiciones de una matriz 2x2
 ;; (test_matriz ((producto_coeficiente_matriz ((par dos) dos)) matriz_prueba1))
-;; '(((1 2) (-1 4)) ((1 1) (5 4)))
+;; (((1 2) (-1 4)) ((1 1) (5 4)))
 (define producto_coeficiente_matriz
   (lambda (valor)
     (lambda (matriz)
@@ -528,7 +525,7 @@
 
 ;; Realiza la potencia de una matriz mediante el algoritmo binario llamado exponenciación binaria
 ;; (test_matriz ((potencia_matricesaux matriz_prueba1) deux))
-;; '(((0 1) (7 4)) ((-7 16) (21 16)))
+;; (((0 1) (7 4)) ((-7 16) (21 16)))
 (define potencia_matricesaux
     (lambda (matriz)
         (lambda (num)
@@ -563,8 +560,8 @@
   )
 
 ;; Realiza la potencia de una matriz
-;;(test_matriz ((potencia_matrices matriz_prueba1) deux)) 
-;;(((0 1) (7 4)) ((-7 16) (21 16)))
+;; (test_matriz ((potencia_matrices matriz_prueba1) deux)) 
+;; (((0 1) (7 4)) ((-7 16) (21 16)))
 (define potencia_matrices
   (lambda (matriz)
     (lambda (num)
